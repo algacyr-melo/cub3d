@@ -1,14 +1,17 @@
 NAME		= cub3d
 
-SRC			= raycaster.c
+SRC			= main.c \
+			  my_mlx_pixel_put.c \
+			  draw_vertical_line.c \
+			  set_image_data.c
 
-OBJ		= $(SRC:.c=.o)
+OBJ			= $(SRC:.c=.o)
 
 CFLAGS		= -Wall -Wextra -Werror
 
 MLX			= mlx/libmlx.a
 
-MLX_LINUX	= mlx_linux/mlx_Linux.a
+MLX_LINUX	= mlx_linux/libmlx_Linux.a
 
 LIBFT		= libft/libft.a
 
@@ -44,7 +47,6 @@ clean		:
 
 fclean		: clean
 	$(RM) $(NAME)
-	make -C mlx clean
 	make -C libft fclean
 
 re			: fclean all

@@ -6,14 +6,12 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:24:48 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/10 17:01:20 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/11 17:55:22 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 24
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
 
 int	map[MAP_WIDTH][MAP_HEIGHT] =
 {
@@ -43,42 +41,14 @@ int	map[MAP_WIDTH][MAP_HEIGHT] =
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-#include <mlx.h>
-#include <math.h>
-#include <stdlib.h>
-
-typedef struct	s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-void	draw_vertical_line(t_data *data, int x, int start, int end, int color)
-{
-	int	y_offset = 0;
-	while ( y_offset < (end - start))
-	{
-		my_mlx_pixel_put(data, x, start + y_offset, color);
-		y_offset++;
-	}
-}
+#include "cub3d.h"
 
 int	main( int /*argc*/, char */*argv*/[])
 {
 	void	*mlx;
 	void	*mlx_win;
-	t_data	img;
+	t_img	img;
+	t_line	line;
 
 	double	pos_x = 22, pos_y = 12; //x and y start position
 	double	dir_x = -1, dir_y = 0; //initial direction vector
@@ -87,29 +57,16 @@ int	main( int /*argc*/, char */*argv*/[])
 	//double	time = 0;
 	//double	old_time = 0;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window
-	(
-		mlx,
-	 	SCREEN_WIDTH,
-	 	SCREEN_HEIGHT,
-	 	"My first raycaster!"
-	 );
-	(void)mlx_win;
-	img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	img.addr = mlx_get_data_addr
-	(
-		img.img,
-		&img.bits_per_pixel,
-		&img.line_length,
-		&img.endian
-	);
+	mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, TITLE);
 	while (42)
 	{
-		int	x = 0;
-		while ( x < SCREEN_WIDTH )
+		img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+		set_image_data(&img);
+		line.x = 0;
+		while ( line.x < SCREEN_WIDTH )
 		{
 			//calculate ray position and direction
-			double	camera_x = 2 * x / (double)(SCREEN_WIDTH - 1); //x-coordinate in camera space
+			double	camera_x = 2 * line.x / (double)(SCREEN_WIDTH - 1); //x-coordinate in camera space
 			double	ray_dir_x = dir_x + plane_x * camera_x;
 			double	ray_dir_y = dir_y + plane_y * camera_x;
 
@@ -180,31 +137,34 @@ int	main( int /*argc*/, char */*argv*/[])
 			else			perp_wall_dist = (side_dist_y - delta_dist_y);
 
 			//calculate height of line to draw on screen
-			int	line_height = (int)(SCREEN_HEIGHT / perp_wall_dist);
+			line.height = (int)(SCREEN_HEIGHT / perp_wall_dist);
 
 			//calculate lowest and highest pixel to fill in current stripe
-			int	draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
-			if (draw_start < 0)	draw_start = 0;
-			int	draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
-			if (draw_end >= SCREEN_HEIGHT)	draw_end = SCREEN_HEIGHT - 1;
+			line.y_start = -line.height / 2 + SCREEN_HEIGHT / 2;
+			if (line.y_start < 0)
+				line.y_start = 0;
+
+			line.y_end = line.height / 2 + SCREEN_HEIGHT / 2;
+			if (line.y_end >= SCREEN_HEIGHT)
+				line.y_end = SCREEN_HEIGHT - 1;
 
 			//choose wall color
-			int	color;
 			switch(map[map_x][map_y])
 			{
-				case 1: color = 0xFF0000; break; //red
-				case 2: color = 0x00FF00; break; //green
-				case 3: color = 0x0000FF; break; //blue
-				case 4: color = 0xFFFFFF; break; //white
-				default: color = 0xFFFF00; break; //yellow
+				case 1: line.color = 0xFF0000; break; //red
+				case 2: line.color = 0x00FF00; break; //green
+				case 3: line.color = 0x0000FF; break; //blue
+				case 4: line.color = 0xFFFFFF; break; //white
+				default: line.color = 0xFFFF00; break; //yellow
 			}
 
-			if (side == 1) { color = color / 2; }
+			if (side == 1) { line.color = line.color / 2; }
 
-			draw_vertical_line(&img, x, draw_start, draw_end, color);
-			x++;
+			draw_vertical_line(&img, &line);
+			line.x++;
 		}
 		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+		mlx_destroy_image(mlx, img.img);
 	}
 	mlx_loop(mlx);
 	return (0);
