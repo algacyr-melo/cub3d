@@ -3,7 +3,8 @@ NAME		= cub3d
 SRC			= main.c \
 			  my_mlx_pixel_put.c \
 			  draw_vertical_line.c \
-			  set_image_data.c
+			  set_image_data.c \
+			  hooks.c
 
 OBJ			= $(SRC:.c=.o)
 

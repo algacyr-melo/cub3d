@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/11 17:52:44 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/16 16:55:45 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include <mlx.h>
 # include <math.h>
+# include <stdlib.h>
 
 typedef struct s_img
 {
@@ -38,8 +39,16 @@ typedef struct s_line
 	int	color;
 }		t_line;
 
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+}			t_mlx;
+
 void	set_image_data(t_img *img);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_vertical_line(t_img *img, t_line *line);
+
+void	set_hooks(t_mlx *mlx);
 #endif

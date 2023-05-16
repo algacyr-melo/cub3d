@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:24:48 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/11 17:55:22 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/16 16:56:17 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int	map[MAP_WIDTH][MAP_HEIGHT] =
 
 int	main( int /*argc*/, char */*argv*/[])
 {
-	void	*mlx;
-	void	*mlx_win;
+	t_mlx	mlx;
 	t_img	img;
 	t_line	line;
 
@@ -56,11 +55,12 @@ int	main( int /*argc*/, char */*argv*/[])
 
 	//double	time = 0;
 	//double	old_time = 0;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, TITLE);
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, TITLE);
+	set_hooks(&mlx);
 	while (42)
 	{
-		img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+		img.img = mlx_new_image(mlx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 		set_image_data(&img);
 		line.x = 0;
 		while ( line.x < SCREEN_WIDTH )
@@ -163,9 +163,9 @@ int	main( int /*argc*/, char */*argv*/[])
 			draw_vertical_line(&img, &line);
 			line.x++;
 		}
-		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		mlx_destroy_image(mlx, img.img);
+		mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
+		mlx_destroy_image(mlx.mlx, img.img);
+		mlx_loop(mlx.mlx);
 	}
-	mlx_loop(mlx);
 	return (0);
 }
