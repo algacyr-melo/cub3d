@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_vertical_line.c                               :+:      :+:    :+:   */
+/*   hooks.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 16:56:55 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/17 17:52:42 by almelo           ###   ########.fr       */
+/*   Created: 2023/05/17 18:12:09 by almelo            #+#    #+#             */
+/*   Updated: 2023/05/17 18:13:24 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef HOOKS_H
+# define HOOKS_H
 
-void	draw_vertical_line(t_img *img, t_line *line)
+enum
 {
-	int	offset;
+	ESC = 65307,
+	W = 119,
+	A = 97,
+	S = 115,
+	D = 100,
+	LEFT_ARROW = 65361,
+	RIGHT_ARROW = 65363
+};
 
-	offset = 0;
-	while (offset < (line->height))
-	{
-		my_mlx_pixel_put(img, line->x, line->y_start + offset, line->color);
-		offset++;
-	}
-	return ;
-}
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_DESTROY = 17
+};
+
+#endif

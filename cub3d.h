@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/16 16:55:45 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/17 17:04:20 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # define SCREEN_HEIGHT	480
 # define TITLE			"Hello, Raycasting"
 
+# include "mlx_linux/mlx.h"
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct s_img
 {
@@ -39,16 +41,23 @@ typedef struct s_line
 	int	color;
 }		t_line;
 
-typedef struct s_mlx
+typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-}			t_mlx;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}			t_data;
 
 void	set_image_data(t_img *img);
 
+int		render_next_frame(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_vertical_line(t_img *img, t_line *line);
 
-void	set_hooks(t_mlx *mlx);
+void	set_hooks(t_data *data);
 #endif
