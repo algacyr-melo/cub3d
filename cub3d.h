@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/18 15:40:48 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:54:13 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@
 # define ROT_SPEED		0.05
 # define MOVE_SPEED		0.1
 
+# define MAP_WIDTH		24
+# define MAP_HEIGHT		24
+
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
+
+extern int world_map[MAP_WIDTH][MAP_HEIGHT];
 
 typedef struct s_img
 {

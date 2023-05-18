@@ -6,14 +6,11 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/18 15:23:27 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:55:57 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define MAP_WIDTH	24
-#define MAP_HEIGHT	24
-
-extern int world_map[MAP_WIDTH][MAP_HEIGHT];
+#include "cub3d.h"
 
 int	world_map[MAP_WIDTH][MAP_HEIGHT] =
 {
@@ -42,8 +39,6 @@ int	world_map[MAP_WIDTH][MAP_HEIGHT] =
 	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
-
-#include "cub3d.h"
 
 int	render_next_frame(t_data *data)
 {
