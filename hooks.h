@@ -6,13 +6,14 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:12:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/17 18:13:24 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:41:32 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HOOKS_H
 # define HOOKS_H
 
+// Linux keycodes
 enum
 {
 	ESC = 65307,
@@ -24,6 +25,7 @@ enum
 	RIGHT_ARROW = 65363
 };
 
+// MLX events
 enum
 {
 	ON_KEYDOWN = 2,

@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/17 17:04:20 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:40:48 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # define SCREEN_HEIGHT	480
 # define TITLE			"Hello, Raycasting"
 
-# include "mlx_linux/mlx.h"
+# define ROT_SPEED		0.05
+# define MOVE_SPEED		0.1
+
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
