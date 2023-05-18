@@ -9,6 +9,8 @@ SRC			= main.c \
 
 OBJ			= $(SRC:.c=.o)
 
+CC			= cc
+
 CFLAGS		= -Wall -Wextra -Werror
 
 MLX			= mlx/libmlx.a

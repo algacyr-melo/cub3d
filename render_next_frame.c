@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/17 17:49:22 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:23:27 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ int	render_next_frame(t_data *data)
 		double	delta_dist_x = (ray_dir_x == 0) ? INFINITY : fabs(1 / ray_dir_x);
 		double	delta_dist_y = (ray_dir_y == 0) ? INFINITY : fabs(1 / ray_dir_y);
 		double	perp_wall_dist;
-		//double	delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
-		//double	delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
-		//double	perp_wall_dist;
 
 		//what direction to step in x or y-direction (either +1 or -1)
 		int		step_x;
