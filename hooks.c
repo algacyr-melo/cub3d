@@ -6,13 +6,20 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:11 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/18 17:35:06 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:04:42 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "hooks.h"
 #include <stdio.h>
+
+#ifdef __linux__
+    #include "hooks_linux.h"
+#elif defined(__APPLE__)
+    #include "hooks_mac.h"
+#endif
+
+
 
 void	handle_exit(t_data *data)
 {
