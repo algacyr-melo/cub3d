@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_vertical_line.c                               :+:      :+:    :+:   */
+/*   draw_next_frame.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 16:56:55 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/18 15:13:44 by almelo           ###   ########.fr       */
+/*   Created: 2023/05/22 11:06:21 by almelo            #+#    #+#             */
+/*   Updated: 2023/05/22 17:12:07 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_vertical_line(t_img *img, t_line *line)
+void	draw_next_frame(t_img *img, unsigned int (*buffer)[640])
 {
-	int	offset;
+	int	x;
+	int	y;
 
-	offset = 0;
-	while (offset < (line->y_end - line->y_start))
+	x = 0;
+	while (x < SCREEN_WIDTH)
 	{
-		my_mlx_pixel_put(img, line->x, line->y_start + offset, line->color);
-		offset++;
+		y = 0;
+		while (y < SCREEN_HEIGHT)
+		{
+			my_mlx_pixel_put(img, x, y, buffer[y][x]);
+			y++;
+		}
+		x++;
 	}
-	return ;
 }

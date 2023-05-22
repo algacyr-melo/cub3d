@@ -4,14 +4,15 @@ SRC			= main.c \
 			  set_image_data.c \
 			  hooks.c \
 			  my_mlx_pixel_put.c \
-			  draw_vertical_line.c \
-			  render_next_frame.c
+			  render_next_frame.c \
+			  draw_next_frame.c \
+			  map.c
 
 OBJ			= $(SRC:.c=.o)
 
-CC			= cc
+CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 MLX			= mlx/libmlx.a
 

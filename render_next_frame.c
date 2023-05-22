@@ -6,47 +6,29 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/18 15:55:57 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:21:30 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	world_map[MAP_WIDTH][MAP_HEIGHT] =
-{
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-
 int	render_next_frame(t_data *data)
 {
-	t_img	img;
-	t_line	vline;
+	t_img		img;
+	t_line		vline;
+	uint32_t	screen_buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
+	t_img		tex;
+	int			tex_width;
+	int			tex_height;
 
+	//load texture
+	tex.img = mlx_xpm_file_to_image(data->mlx, "./textures/redbrick.xpm", &tex_width, &tex_height);
+	set_image_data(&tex);
+
+	//create blank frame
 	img.img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	set_image_data(&img);
+
 	vline.x = 0;
 	while (vline.x < SCREEN_WIDTH)
 	{
@@ -64,8 +46,8 @@ int	render_next_frame(t_data *data)
 		double	side_dist_y;
 
 		//length of ray from one x or y-side to next x or y-side
-		double	delta_dist_x = (ray_dir_x == 0) ? INFINITY : fabs(1 / ray_dir_x);
-		double	delta_dist_y = (ray_dir_y == 0) ? INFINITY : fabs(1 / ray_dir_y);
+		double	delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
+		double	delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
 		double	perp_wall_dist;
 
 		//what direction to step in x or y-direction (either +1 or -1)
@@ -132,22 +114,41 @@ int	render_next_frame(t_data *data)
 		if (vline.y_end >= SCREEN_HEIGHT)
 			vline.y_end = SCREEN_HEIGHT - 1;
 
-		//choose wall color
-		switch(world_map[map_x][map_y])
+		//texturing calculations
+		//calculate value of wall_x
+		double	wall_x; //where exactly the wall was hit
+		if (side == 0)	wall_x = data->pos_y + perp_wall_dist * ray_dir_y;
+		else			wall_x = data->pos_x + perp_wall_dist * ray_dir_x;
+		wall_x -= floor((wall_x));
+
+		//x coordinate on the texture
+		int	tex_x = (int)(wall_x * (double)(tex_width));
+		if (side == 0 && ray_dir_x > 0)	tex_x = tex_width - tex_x - 1;
+		if (side == 1 && ray_dir_y < 0)	tex_x = tex_width - tex_x - 1;
+
+		//how much to increase the texture coordinate per screen pixel
+		double	step = 1.0 * tex_height / vline.height;
+
+		//starting texture coordinate
+		double	tex_pos = (vline.y_start - SCREEN_HEIGHT / 2 + vline.height / 2) * step;
+		for (int y = vline.y_start; y < vline.y_end; y++)
 		{
-			case 1: vline.color = 0xFF0000; break; //red
-			case 2: vline.color = 0x00FF00; break; //green
-			case 3: vline.color = 0x0000FF; break; //blue
-			case 4: vline.color = 0xFFFFFF; break; //white
-			default: vline.color = 0xFFFF00; break; //yellow
+			//cast the texture coordinate to integer, and mask with (tex_width - 1) in case of overflow
+			int	tex_y = (int)tex_pos & (tex_height - 1);
+			tex_pos += step;
+			//int	color = *(uint32_t *)(tex.addr + tex_height * (tex_x + tex_y));
+			int	color = *(uint32_t *)(tex.addr + (tex_x * (tex.bits_per_pixel / 2) + (tex_y * tex.line_length)));
+
+			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+			if(side == 0)	color = (color >> 1) & 8355711;
+			screen_buffer[y][vline.x] = color;
 		}
-
-		if (side == 1) { vline.color = vline.color / 2; }
-
-		draw_vertical_line(&img, &vline);
 		vline.x++;
 	}
+	draw_next_frame(&img, screen_buffer);
+	for(int y = 0; y < SCREEN_HEIGHT; y++) for(int x = 0; x < SCREEN_WIDTH; x++) screen_buffer[y][x] = 0; //clear the buffer instead of cls()
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
 	mlx_destroy_image(data->mlx, img.img);
+	mlx_destroy_image(data->mlx, tex.img);
 	return (0);
 }

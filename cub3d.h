@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/18 15:54:13 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:25:02 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@
 # define TITLE			"Hello, Raycasting"
 
 # define ROT_SPEED		0.05
-# define MOVE_SPEED		0.1
+# define MOVE_SPEED		0.25
 
 # define MAP_WIDTH		24
 # define MAP_HEIGHT		24
 
+//# include "mlx_linux/mlx.h"
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdint.h>
 
 extern int world_map[MAP_WIDTH][MAP_HEIGHT];
 
@@ -65,6 +67,7 @@ void	set_image_data(t_img *img);
 int		render_next_frame(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_vertical_line(t_img *img, t_line *line);
+void	draw_next_frame(t_img *img, uint32_t (*buffer)[SCREEN_WIDTH]);
 
 void	set_hooks(t_data *data);
 #endif
