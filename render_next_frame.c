@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 17:21:30 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 17:43:31 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	render_next_frame(t_data *data)
 			int	tex_y = (int)tex_pos & (tex_height - 1);
 			tex_pos += step;
 			//int	color = *(uint32_t *)(tex.addr + tex_height * (tex_x + tex_y));
-			int	color = *(uint32_t *)(tex.addr + (tex_x * (tex.bits_per_pixel / 2) + (tex_y * tex.line_length)));
+			int	color = *(uint32_t *)(tex.addr + (tex_x * (tex.bits_per_pixel / 8) + (tex_y * tex.line_length)));
 
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if(side == 0)	color = (color >> 1) & 8355711;
