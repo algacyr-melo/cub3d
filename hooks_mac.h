@@ -9,8 +9,8 @@ enum
     A = 0,
     S = 1,
     D = 2,
-    LEFT_ARROW = 65361,
-    RIGHT_ARROW = 65363
+    LEFT_ARROW = 123,
+    RIGHT_ARROW = 124
 };
 
 // MLX events
@@ -18,6 +18,7 @@ enum
 {
 	ON_KEYDOWN = 2,
 	ON_DESTROY = 17
+
 };
 
 #endif // KEYCODES_MAC_H
