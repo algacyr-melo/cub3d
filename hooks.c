@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:11 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 16:04:42 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:57:16 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	rotate_right(t_data *data)
 void	move_forward(t_data *data)
 {
 	// move forward if no wall in front of you
-	if(world_map[(int)(data->pos_x + data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
+	if(world_map[(int)(data->pos_x + (data->dir_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
 		data->pos_x += data->dir_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + data->pos_x * MOVE_SPEED)] == 0)
+	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + (data->dir_y * MOVE_SPEED))] == 0)
 		data->pos_y += data->dir_y * MOVE_SPEED;
 	return ;
 }
@@ -72,27 +72,27 @@ void	move_forward(t_data *data)
 void	move_backwards(t_data *data)
 {
 	//move backwards if no wall behind you
-	if(world_map[(int)(data->pos_x - data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
+	if(world_map[(int)(data->pos_x - (data->dir_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
 		data->pos_x -= data->dir_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * MOVE_SPEED)] == 0)
+	if(world_map[(int)(data->pos_x)][(int)(data->pos_y - (data->dir_y * MOVE_SPEED))] == 0)
 		data->pos_y -= data->dir_y * MOVE_SPEED;
 	return ;
 }
 
 void	move_right(t_data *data)
 {
-	if(world_map[(int)(data->pos_x + data->plane_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
+	if(world_map[(int)(data->pos_x + (data->plane_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
 		data->pos_x += data->plane_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + data->plane_y * MOVE_SPEED)] == 0)
+	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + (data->plane_y * MOVE_SPEED))] == 0)
 		data->pos_y += data->plane_y * MOVE_SPEED;
 	return ;
 }
 
 void	move_left(t_data *data)
 {
-	if(world_map[(int)(data->pos_x - data->plane_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
+	if(world_map[(int)(data->pos_x - (data->plane_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
 		data->pos_x -= data->plane_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y - data->plane_y * MOVE_SPEED)] == 0)
+	if(world_map[(int)(data->pos_x)][(int)(data->pos_y - (data->plane_y * MOVE_SPEED))] == 0)
 		data->pos_y -= data->plane_y * MOVE_SPEED;
 	return ;
 }
