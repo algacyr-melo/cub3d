@@ -6,11 +6,11 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:14:44 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 16:15:09 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 21:28:24 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 int	world_map[MAP_WIDTH][MAP_HEIGHT] =
 {

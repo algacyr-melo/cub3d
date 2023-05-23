@@ -6,11 +6,11 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 17:43:31 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 21:31:06 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 int	render_next_frame(t_data *data)
 {
@@ -104,21 +104,26 @@ int	render_next_frame(t_data *data)
 
 		//calculate height of line to draw on screen
 		vline.height = (int)(SCREEN_HEIGHT / perp_wall_dist);
-
+		int pitch = 100;	
 		//calculate lowest and highest pixel to fill in current stripe
-		vline.y_start = -vline.height / 2 + SCREEN_HEIGHT / 2;
+
+		vline.y_start = -vline.height / 2 + SCREEN_HEIGHT / 2 + pitch;
 		if (vline.y_start < 0)
 			vline.y_start = 0;
 
-		vline.y_end = vline.height / 2 + SCREEN_HEIGHT / 2;
+		vline.y_end = vline.height / 2 + SCREEN_HEIGHT / 2 + pitch;
 		if (vline.y_end >= SCREEN_HEIGHT)
 			vline.y_end = SCREEN_HEIGHT - 1;
 
 		//texturing calculations
+	//	int texNum = world_map[map_x][map_y] - 1; // subtracted from it so that texture 0 can be used!
+
 		//calculate value of wall_x
 		double	wall_x; //where exactly the wall was hit
-		if (side == 0)	wall_x = data->pos_y + perp_wall_dist * ray_dir_y;
-		else			wall_x = data->pos_x + perp_wall_dist * ray_dir_x;
+		if (side == 0)	
+			wall_x = data->pos_y + perp_wall_dist * ray_dir_y;
+		else			
+			wall_x = data->pos_x + perp_wall_dist * ray_dir_x;
 		wall_x -= floor((wall_x));
 
 		//x coordinate on the texture
@@ -130,7 +135,7 @@ int	render_next_frame(t_data *data)
 		double	step = 1.0 * tex_height / vline.height;
 
 		//starting texture coordinate
-		double	tex_pos = (vline.y_start - SCREEN_HEIGHT / 2 + vline.height / 2) * step;
+		double	tex_pos = (vline.y_start - pitch - SCREEN_HEIGHT / 2 + vline.height / 2) * step;
 		for (int y = vline.y_start; y < vline.y_end; y++)
 		{
 			//cast the texture coordinate to integer, and mask with (tex_width - 1) in case of overflow
@@ -140,7 +145,7 @@ int	render_next_frame(t_data *data)
 			int	color = *(uint32_t *)(tex.addr + (tex_x * (tex.bits_per_pixel / 8) + (tex_y * tex.line_length)));
 
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if(side == 0)	color = (color >> 1) & 8355711;
+			if(side == 1)	color = (color >> 1) & 8355711;
 			screen_buffer[y][vline.x] = color;
 		}
 		vline.x++;

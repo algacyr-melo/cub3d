@@ -6,12 +6,12 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:24:48 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 15:55:33 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:28:13 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 int	main( int argc, char **argv)
 {
@@ -19,7 +19,7 @@ int	main( int argc, char **argv)
 
 	(void) argc;
 	(void) argv;
-	data.pos_x = 22, data.pos_y = 12; //x and y start position
+	data.pos_x = 22, data.pos_y = 11.5; //x and y start position
 	data.dir_x = -1, data.dir_y = 0; //initial direction vector
 	data.plane_x = 0, data.plane_y = 0.66; //the 2d raycaster version of camera plane
 	

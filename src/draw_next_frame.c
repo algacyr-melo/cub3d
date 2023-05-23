@@ -6,13 +6,13 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:06:21 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 17:12:07 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 21:27:47 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
-void	draw_next_frame(t_img *img, unsigned int (*buffer)[640])
+void	draw_next_frame(t_img *img, unsigned int (*buffer)[SCREEN_WIDTH])
 {
 	int	x;
 	int	y;

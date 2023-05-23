@@ -6,22 +6,22 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 17:25:02 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 18:39:22 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define SCREEN_WIDTH	640
-# define SCREEN_HEIGHT	480
+# define SCREEN_WIDTH	1500
+# define SCREEN_HEIGHT	1200
 # define TITLE			"Hello, Raycasting"
 
 # define ROT_SPEED		0.05
 # define MOVE_SPEED		0.25
 
-# define MAP_WIDTH		24
-# define MAP_HEIGHT		24
+# define MAP_WIDTH		240
+# define MAP_HEIGHT		240
 
 //# include "mlx_linux/mlx.h"
 # include <mlx.h>

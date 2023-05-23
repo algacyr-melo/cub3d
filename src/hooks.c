@@ -6,17 +6,17 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:11 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 17:57:16 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/22 21:29:28 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 #include <stdio.h>
 
 #ifdef __linux__
-    #include "hooks_linux.h"
+    #include "../inc/hooks_linux.h"
 #elif defined(__APPLE__)
-    #include "hooks_mac.h"
+    #include "../inc/hooks_mac.h"
 #endif
 
 
