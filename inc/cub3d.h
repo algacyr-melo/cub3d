@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/23 16:57:43 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:01:56 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdint.h>
+# include "maps.h"
+# include "../libft/libft.h" 
+# include <fcntl.h>
 
 extern int world_map[MAP_WIDTH][MAP_HEIGHT];
 
@@ -52,6 +55,7 @@ typedef struct s_line
 
 typedef struct s_data
 {
+	t_map	map;
 	void	*mlx;
 	void	*win;
 	double	pos_x;
@@ -62,13 +66,16 @@ typedef struct s_data
 	double	plane_y;
 }			t_data;
 
-// VERIFICATION
+// VERIFICATION.C
 int	validate_cub(char *map_name);
 int	ft_is_cub(char *haystack);
-void	ft_create_map(int fd);
+// void	ft_create_map(int fd);
 int	ft_is_cub(char *haystack);
-int	verification_main(char **argv, int argc);
+int	verification_main(char **argv, int argc, t_data *data);
 
+// CREATE_MAP.C
+void	create_map(t_data *data);
+void	to_matrix(t_data *data, char *joker);
 
 void	set_image_data(t_img *img);
 

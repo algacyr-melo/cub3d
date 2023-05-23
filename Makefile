@@ -1,13 +1,14 @@
 NAME		= cub3d
 
-SRC			= src/main.c \
-			  src/set_image_data.c \
-			  src/hooks.c \
-			  src/my_mlx_pixel_put.c \
-			  src/render_next_frame.c \
-			  src/draw_next_frame.c \
-			  src/map.c
-
+SRC			=	src/main.c \
+				src/set_image_data.c \
+				src/hooks.c \
+				src/my_mlx_pixel_put.c \
+				src/render_next_frame.c \
+				src/draw_next_frame.c \
+				src/map.c \
+			  	src/verification.c \
+				src/create_map.c
 OBJ			= $(SRC:.c=.o)
 
 CC			= gcc

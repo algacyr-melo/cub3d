@@ -6,11 +6,11 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/22 22:19:08 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:46:24 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../inc/cub3d.h"
+#include "../inc/cub3d.h"
 #include "../libft/libft.h"
 
 int	ft_is_cub(char *haystack)
@@ -55,10 +55,27 @@ int	validate_cub(char *map_name)
 		return (0);
 }
 
-/*
-#include <stdio.h>
-int main()
+int	verification_main(char **argv, int argc, t_data *data)
 {
-	printf("%i\n", validate_cub("hello.cu"));	
+
+	if (argc != 2)
+	{
+		ft_printf("Wrong input :/\nUsage: ./cub3d path_to_.cub\n");
+		return (0);
+	}
+	if (validate_cub(argv[1]) == 0)
+	{
+		ft_printf("Not a .cub :/\n");
+		return (0);
+	}
+	if ((data->map.fd = open(argv[1], O_RDONLY)) > 0)
+		create_map(data);
+	else
+	{
+		ft_printf("Map and textures instruction were not found\n");
+		return (0);
+	}
+	return (1);
 }
-*/
+
+
