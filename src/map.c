@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:14:44 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 21:28:24 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:59:25 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,44 @@ int	world_map[MAP_WIDTH][MAP_HEIGHT] =
 	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
+
+/*
+void	ft_create_map(int fd)
+{
+	char	*str;
+	char	*joker;
+	int		len;
+
+	str = NULL;
+	joker = get_next_line(fd);
+	len = ft_strlen(joker);
+	while (1)
+	{
+		str = get_next_line(map->fd);
+		if (str == NULL)
+			break ;
+		joker = ft_strjoin(joker, str);
+		map->lines++;
+	}
+	free(str);
+	close(fd);
+	printf("%s", joker);
+//	ft_validate_count(joker, map);
+}
+
+void	ft_validate_count(char *joker, t_map *map)
+{
+	map->window_height = map->lines;
+	map->map = ft_split(joker, '\n');
+	free(joker);
+	if (counter(map) == 1)
+		open_window(map);
+	else
+	{
+		ft_printf("Error\nInvalid map!");
+		exit(0);
+	}
+
+}
+
+*/

@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 18:39:22 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:45:53 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ typedef struct s_data
 	double	plane_x;
 	double	plane_y;
 }			t_data;
+
+// VERIFICATION
+int	validate_cub(char *map_name);
+int	ft_is_cub(char *haystack);
+void	ft_create_map(int fd);
+int	ft_is_cub(char *haystack);
+int	validate_cub(char *map_name);
+int	verification_main(char **argv);
+
 
 void	set_image_data(t_img *img);
 
