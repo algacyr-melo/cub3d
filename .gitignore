@@ -17,7 +17,6 @@
 *.pch
 
 # Libraries
-libft/
 mlx_linux/
 mlx/
 *.lib

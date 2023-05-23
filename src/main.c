@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:24:48 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 22:59:00 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:58:13 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 #include "../libft/libft.h"
 #include <fcntl.h>
 
-int	verification_main(char **argv)
+int	verification_main(char **argv, int argc)
 {
 	int fd;
-
+	
 	fd = 0;
+	if (argc != 2)
+	{
+		ft_printf("Wrong input :/\nUsage: ./cub3d path_to_.cub\n");	
+		return (0);	
+	}
 	if (validate_cub(argv[1]) == 0)
 	{
 		ft_printf("Not a .cub :/");
@@ -76,7 +81,7 @@ int	main( int argc, char **argv)
 {
 	t_data	data;
 
-	if (!verification_main(argv))
+	if (!verification_main(argv, argc))
 			return (0);
 	(void) argc;
 	(void) argv;

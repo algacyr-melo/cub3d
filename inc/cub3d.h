@@ -6,15 +6,15 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 22:45:53 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:57:43 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define SCREEN_WIDTH	1500
-# define SCREEN_HEIGHT	1200
+# define SCREEN_WIDTH	1200
+# define SCREEN_HEIGHT	1000
 # define TITLE			"Hello, Raycasting"
 
 # define ROT_SPEED		0.05
@@ -67,8 +67,7 @@ int	validate_cub(char *map_name);
 int	ft_is_cub(char *haystack);
 void	ft_create_map(int fd);
 int	ft_is_cub(char *haystack);
-int	validate_cub(char *map_name);
-int	verification_main(char **argv);
+int	verification_main(char **argv, int argc);
 
 
 void	set_image_data(t_img *img);
