@@ -10,22 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../inc/cub3d.h"
 
 void	create_map(t_data *data)
 {
 	char *str;
 	char *joker;
-	//int i;
 	int len;
 
 	len = 0;
-	//i = 0;
 	str = NULL;
 	joker = get_next_line(data->map.fd);
+	joker = remove_sp(joker);
 	while (1)
 	{
 		str = get_next_line(data->map.fd);
+		str = remove_sp(str);
 		if (str == NULL)
 			break ;
 		joker = ft_strjoin(joker, str);
@@ -45,6 +46,33 @@ void	to_matrix(t_data *data, char *joker)
 		ft_printf("%s\n", data->map.world_map[i]); 
 		i++;
 	}
+}
 
+char *remove_sp(char *str)
+{
+	char *ret;
+	char *joker;	
+	int begin;
+	int end;
+
+	if (str == NULL)
+		return (NULL);
+	ret = "";
+	joker = NULL;
+	begin = 0;
+	end = 0;
+
+	while (str[begin])
+	{
+		begin = end;
+		while (str[end] != ' ' && str[end] != '\0')
+			end++;
+		joker = ft_substr(str, begin, end - begin);
+		while(str[end] == ' ' && str[end] != '\0')
+				end++;
+		ret = ft_strjoin(ret, joker);
+	}
+	free(str);
+	return (ret);
 }
 

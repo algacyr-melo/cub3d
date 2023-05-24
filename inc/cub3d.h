@@ -77,13 +77,14 @@ typedef struct s_data
 // VERIFICATION.C
 int	validate_cub(char *map_name);
 int	ft_is_cub(char *haystack);
-// void	ft_create_map(int fd);
 int	ft_is_cub(char *haystack);
 int	verification_main(char **argv, int argc, t_data *data);
+
 
 // CREATE_MAP.C
 void	create_map(t_data *data);
 void	to_matrix(t_data *data, char *joker);
+char 	*remove_sp(char *str);
 
 //set struct with mlx image data
 void	set_image_data(t_img *img);

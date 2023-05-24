@@ -16,8 +16,8 @@ int	main( int argc, char **argv)
 {
 	t_data	data;
 
-	//if (!verification_main(argv, argc, &data))
-	//		return (0);
+	if (!verification_main(argv, argc, &data))
+			return (0);
 
 	(void)argc;
 	(void)argv;
