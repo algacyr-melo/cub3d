@@ -9,6 +9,7 @@ SRC			=	src/main.c \
 				src/map.c \
 			  	src/verification.c \
 				src/create_map.c
+
 OBJ			= $(SRC:.c=.o)
 
 CC			= gcc
@@ -24,7 +25,7 @@ LIBFT		= libft/libft.a
 DETECTED_OS	= $(shell uname)
 
 ifeq ($(DETECTED_OS), Linux)
-$(NAME)		: $(OBJ) $(MLX_LINUX) $(LIBFT)
+$(NAME)		: $(OBJ) $(MLX_LINUX) $(LIBFT) inc/cub3d.h
 	$(CC) $(OBJ) -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 %.o			: %.c

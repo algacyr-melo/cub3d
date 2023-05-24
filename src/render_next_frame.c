@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 21:31:06 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/24 01:08:23 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	render_next_frame(t_data *data)
 	int			tex_height;
 
 	//load texture
-	tex.img = mlx_xpm_file_to_image(data->mlx, "./textures/redbrick.xpm", &tex_width, &tex_height);
+	tex.img = mlx_xpm_file_to_image(data->mlx, "./textures/mossy.xpm", &tex_width, &tex_height);
 	set_image_data(&tex);
 
 	//create blank frame
@@ -104,9 +104,9 @@ int	render_next_frame(t_data *data)
 
 		//calculate height of line to draw on screen
 		vline.height = (int)(SCREEN_HEIGHT / perp_wall_dist);
-		int pitch = 100;	
-		//calculate lowest and highest pixel to fill in current stripe
+		int pitch = 100;
 
+		//calculate lowest and highest pixel to fill in current stripe
 		vline.y_start = -vline.height / 2 + SCREEN_HEIGHT / 2 + pitch;
 		if (vline.y_start < 0)
 			vline.y_start = 0;
@@ -134,6 +134,16 @@ int	render_next_frame(t_data *data)
 		//how much to increase the texture coordinate per screen pixel
 		double	step = 1.0 * tex_height / vline.height;
 
+		// Draw ceil
+		int	color_ceil = 0x21ABCD; //blue
+		for (int y = 0; y < vline.y_start; y++)
+			screen_buffer[y][vline.x] = color_ceil;
+
+		// Draw floor
+		int	color_floor = 0x5F583C; //forest
+		for (int y = vline.y_end; y < SCREEN_HEIGHT; y++)
+			screen_buffer[y][vline.x] = color_floor;
+
 		//starting texture coordinate
 		double	tex_pos = (vline.y_start - pitch - SCREEN_HEIGHT / 2 + vline.height / 2) * step;
 		for (int y = vline.y_start; y < vline.y_end; y++)
@@ -141,7 +151,6 @@ int	render_next_frame(t_data *data)
 			//cast the texture coordinate to integer, and mask with (tex_width - 1) in case of overflow
 			int	tex_y = (int)tex_pos & (tex_height - 1);
 			tex_pos += step;
-			//int	color = *(uint32_t *)(tex.addr + tex_height * (tex_x + tex_y));
 			int	color = *(uint32_t *)(tex.addr + (tex_x * (tex.bits_per_pixel / 8) + (tex_y * tex.line_length)));
 
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"

@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:00:29 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/23 20:03:30 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/23 21:45:38 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	create_map(t_data *data)
 {
 	char *str;
 	char *joker;
-	int i;
+	//int i;
 	int len;
 
 	len = 0;
-	i = 0;
+	//i = 0;
 	str = NULL;
 	joker = get_next_line(data->map.fd);
 	while (1)
