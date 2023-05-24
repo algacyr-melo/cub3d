@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/24 01:20:27 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/24 02:46:10 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ extern int world_map[MAP_WIDTH][MAP_HEIGHT];
 # include <stdio.h>
 # include <stdint.h>
 # include "maps.h"
-# include "../libft/libft.h" 
+//# include "../libft/libft.h" 
+# include "../libft/header/libft.h" 
+# include "../libft/header/ft_printf.h"
+# include "../libft/header/get_next_line.h"
 # include <fcntl.h>
 
 typedef struct s_img

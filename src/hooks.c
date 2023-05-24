@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:11 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/22 21:29:28 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/24 04:28:07 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 #include <stdio.h>
 
 #ifdef __linux__
-    #include "../inc/hooks_linux.h"
+# include "../inc/hooks_linux.h"
 #elif defined(__APPLE__)
-    #include "../inc/hooks_mac.h"
+# include "../inc/hooks_mac.h"
 #endif
-
-
 
 void	handle_exit(t_data *data)
 {
@@ -61,10 +59,17 @@ void	rotate_right(t_data *data)
 
 void	move_forward(t_data *data)
 {
+	//debug
+	//printf("posX: %f\n", data->pos_x);
+	//printf("dirX: %f\n", data->dir_x);
+
+	//printf("posY: %f\n", data->pos_y);
+	//printf("dirY: %f\n", data->dir_y);
+	
 	// move forward if no wall in front of you
-	if(world_map[(int)(data->pos_x + (data->dir_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
+	if(world_map[(int)(data->pos_x + data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
 		data->pos_x += data->dir_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + (data->dir_y * MOVE_SPEED))] == 0)
+	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * MOVE_SPEED)] == 0)
 		data->pos_y += data->dir_y * MOVE_SPEED;
 	return ;
 }

@@ -6,12 +6,11 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/23 19:46:24 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/24 04:31:06 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-#include "../libft/libft.h"
 
 int	ft_is_cub(char *haystack)
 {
