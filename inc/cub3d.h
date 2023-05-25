@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/24 02:46:10 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/25 15:57:07 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	to_matrix(t_data *data, char *joker);
 char 	*remove_sp(char *str);
 
 // VALIDATE_MAP.C
-int	validate_main(t_map *map);
+int		validate_main(t_map *map);
+int		wall_check(t_map *map);
+int		wall_check2(t_map *map);
+void	biggest_width(t_map *map);
 
 //set struct with mlx image data
 void	set_image_data(t_img *img);

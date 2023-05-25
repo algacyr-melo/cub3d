@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:24:48 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/24 03:54:32 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/25 17:00:54 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ int	main( int argc, char **argv)
 	t_data	data;
 
 	if (!verification_main(argv, argc, &data))
-			return (0);
-/*
+		return (0);
+
+	ft_printf("map width: %i\n", data.map.window_width);
+	ft_printf("map heigth: %i\n", data.map.window_height);	
+
+
 	(void)argc;
 	(void)argv;
 	//initial player position and orientation that should be loaded from.cub
@@ -31,5 +35,5 @@ int	main( int argc, char **argv)
 	set_hooks(&data);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_loop(data.mlx);
-	return (0); */
+	return (0);
 }

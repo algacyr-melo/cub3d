@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/24 04:31:06 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/25 16:37:22 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	verification_main(char **argv, int argc, t_data *data)
 		ft_printf("Map and textures instruction were not found\n");
 		return (0);
 	}
-	validate_main(&data->map);
+	if(validate_main(&data->map) == 0)
+		return (0);
 	return (1);
 }
 
