@@ -16,8 +16,8 @@
 //# define SCREEN_WIDTH	1200
 //# define SCREEN_HEIGHT	1000
 
-# define SCREEN_WIDTH	800
-# define SCREEN_HEIGHT	600
+# define SCREEN_WIDTH	1400
+# define SCREEN_HEIGHT	800
 
 # define TITLE			"Hello, Raycasting"
 
@@ -85,6 +85,9 @@ int	verification_main(char **argv, int argc, t_data *data);
 void	create_map(t_data *data);
 void	to_matrix(t_data *data, char *joker);
 char 	*remove_sp(char *str);
+
+// VALIDATE_MAP.C
+int	validate_main(t_map *map);
 
 //set struct with mlx image data
 void	set_image_data(t_img *img);

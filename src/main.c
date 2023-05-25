@@ -18,7 +18,7 @@ int	main( int argc, char **argv)
 
 	if (!verification_main(argv, argc, &data))
 			return (0);
-
+/*
 	(void)argc;
 	(void)argv;
 	//initial player position and orientation that should be loaded from.cub
@@ -31,5 +31,5 @@ int	main( int argc, char **argv)
 	set_hooks(&data);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_loop(data.mlx);
-	return (0);
+	return (0); */
 }

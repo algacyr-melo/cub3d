@@ -22,7 +22,7 @@ int	render_next_frame(t_data *data)
 	int			tex_height;
 
 	//load texture
-	tex.img = mlx_xpm_file_to_image(data->mlx, "./textures/colorstone.xpm", &tex_width, &tex_height);
+	tex.img = mlx_xpm_file_to_image(data->mlx, "./textures/purplestone.xpm", &tex_width, &tex_height);
 	set_image_data(&tex);
 
 	//create blank frame

@@ -74,6 +74,7 @@ int	verification_main(char **argv, int argc, t_data *data)
 		ft_printf("Map and textures instruction were not found\n");
 		return (0);
 	}
+	validate_main(&data->map);
 	return (1);
 }
 
