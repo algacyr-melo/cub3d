@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/25 18:56:50 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/25 22:34:47 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	ft_is_cub(char *haystack);
 int	ft_is_cub(char *haystack);
 int	verification_main(char **argv, int argc, t_data *data);
 
+// 	TEXTURES_PATH
+int	textures_path(t_map *map);
 
 // CREATE_MAP.C
 void	create_map(t_data *data);

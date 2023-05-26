@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:00:29 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/25 16:21:58 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:16:58 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	create_map(t_data *data)
 	{
 		str = get_next_line(data->map.fd);
 		str = remove_sp(str);
+		// is_empty_line()  // must verify if the line is empty in the middle of the map. 
 		if (str == NULL)
 			break ;
 		joker = ft_strjoin(joker, str);
 		len++;
 	}
-	data->map.window_height = len + 1;
 	free(str);
 	close(data->map.fd);
 	to_matrix(data, joker);
@@ -42,6 +42,10 @@ void	to_matrix(t_data *data, char *joker)
 {
 	data->map.world_map = ft_split(joker, '\n');
 	int i = 0;
+	while (data->map.world_map[i])
+		i++;
+	data->map.window_height = i;
+	i = 0;
 	while(i <= data->map.window_height - 1)	
 	{
 		ft_printf("%s\n", data->map.world_map[i]); 
@@ -66,10 +70,10 @@ char *remove_sp(char *str)
 	while (str[begin])
 	{
 		begin = end;
-		while (str[end] != ' ' && str[end] != '\0')
+		while (str[end] != ' ' && str[end] != '\t' && str[end] != '\0')
 			end++;
 		joker = ft_substr(str, begin, end - begin);
-		while(str[end] == ' ' && str[end] != '\0')
+		while((str[end] == ' ' || str[end] == '\t') && str[end] != '\0')
 				end++;
 		ret = ft_strjoin(ret, joker);
 	}

@@ -9,7 +9,9 @@ SRC			=	src/main.c \
 				src/map.c \
 			  	src/verification.c \
 				src/create_map.c \
-				src/validate_map.c
+				src/validate_map.c \
+				src/textures_path.c
+
 OBJ			= $(SRC:.c=.o)
 
 CC			= gcc

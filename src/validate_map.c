@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/25 16:36:24 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:22:59 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int	validate_main(t_map *map)
 {
+	textures_path(map);
 	biggest_width(map);
 	if(wall_check(map))
 			return (1);
