@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/24 04:18:45 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/25 20:44:36 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	render_next_frame(t_data *data)
 	while (vline.x < SCREEN_WIDTH)
 	{
 		//calculate ray position and direction
-		double	camera_x = 2 * vline.x / (double)(SCREEN_WIDTH - 1); //x-coordinate in camera space
+		double	camera_x = 2 * vline.x / (double)(SCREEN_WIDTH) - 1; //x-coordinate in camera space
 		double	ray_dir_x = data->dir_x + data->plane_x * camera_x;
 		double	ray_dir_y = data->dir_y + data->plane_y * camera_x;
 

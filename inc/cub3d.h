@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/25 15:57:07 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:56:50 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 //# define SCREEN_WIDTH	1200
 //# define SCREEN_HEIGHT	1000
 
-# define SCREEN_WIDTH	1400
-# define SCREEN_HEIGHT	800
+# define SCREEN_WIDTH	800
+# define SCREEN_HEIGHT	600
 
 # define TITLE			"Hello, Raycasting"
 
-# define ROT_SPEED		0.05
-# define MOVE_SPEED		0.25
+# define ROT_SPEED		0.1
+# define MOVE_SPEED		0.3
 
 //only works with the tutorial map
 # define MAP_WIDTH		24
