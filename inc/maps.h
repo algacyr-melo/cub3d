@@ -18,13 +18,14 @@ typedef struct s_map
 	int		fd;
 	int		window_height;
 	int		window_width;
+	int		map_start;
 	char	*path_NO;
 	char	*path_SO;
 	char	*path_WE;
 	char	*path_EA;
 	char	**world_map;
-	
-
+	char	*floor;
+	char	*ciel;
 } t_map;
 
 #endif

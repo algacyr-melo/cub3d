@@ -76,6 +76,15 @@ int	verification_main(char **argv, int argc, t_data *data)
 	}
 	if(validate_main(&data->map) == 0)
 		return (0);
+	printf("\n\n");
+	printf("Valor de map->path_NO: %s\n", data->map.path_NO);
+	printf("Valor de map->path_SO: %s\n", data->map.path_SO);
+	printf("Valor de map->path_WE: %s\n", data->map.path_WE);
+	printf("Valor de map->path_EA: %s\n", data->map.path_EA);
+	
+	
+	
+	
 	return (1);
 }
 

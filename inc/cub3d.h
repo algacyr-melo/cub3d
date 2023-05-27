@@ -81,7 +81,13 @@ int	ft_is_cub(char *haystack);
 int	verification_main(char **argv, int argc, t_data *data);
 
 // 	TEXTURES_PATH
-int	textures_path(t_map *map);
+int	textures_main(t_map *map);
+int	get_NO(t_map *map, int i);
+int	get_SO(t_map *map, int i);
+int	get_WE(t_map *map, int i);
+int	get_EA(t_map *map, int i);
+int	not_map(t_map *map, int i);
+int	floor_ciel(t_map *map, int i);
 
 // CREATE_MAP.C
 void	create_map(t_data *data);

@@ -1,10 +1,10 @@
-NO ../textures/bluestone.xpm
+NO ./textures/bluestone.xpm
 
-SO ./../textures/bluestone.xpm
+SO ./textures/colorstone.xpm
 
-WE ./path_to_the_west_texture
+WE ./textures/eagle.xpm
 
-EA ./path_to_the_east_texture
+EA ./textures/greystone.xpm
 
 F 220,100,0
 

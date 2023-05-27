@@ -46,11 +46,7 @@ void	to_matrix(t_data *data, char *joker)
 		i++;
 	data->map.window_height = i;
 	i = 0;
-	while(i <= data->map.window_height - 1)	
-	{
-		ft_printf("%s\n", data->map.world_map[i]); 
-		i++;
-	}
+	free(joker);
 }
 
 char *remove_sp(char *str)

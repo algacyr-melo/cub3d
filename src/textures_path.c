@@ -17,74 +17,136 @@ int	textures_main(t_map *map)
 	int i;
 	int j;
 
-	j = 2;
+	j = 0;
 	i = 0;
-	if (ft_strncmp(map->world_map[i], "NO", 2) == 0)
+
+	while (not_map(map, i))
 	{
-		if(get_NO(map, i) == 0)
-			return (printf("Texture not found\n");
+		if (ft_strncmp(map->world_map[i], "NO", 2) == 0)
+		{
+			if(get_NO(map, i) == 0)
+				return (printf("Texture not found\n"));
+		}
+		else if (ft_strncmp(map->world_map[i], "SO", 2) == 0)
+		{
+			if(get_SO(map, i) == 0)
+				return (printf("Texture not found\n"));
+		}
+		else if (ft_strncmp(map->world_map[i], "WE", 2) == 0)
+		{
+			if(get_WE(map, i) == 0)
+				return (printf("Texture not found\n"));
+		}
+		else if (ft_strncmp(map->world_map[i], "EA", 2) == 0)
+		{
+			if(get_EA(map, i) == 0)
+				return (printf("Texture not found\n"));
+		}
+		else if (map->world_map[i][0] == 'F' || map->world_map[i][0] == 'C')
+		{
+			if(floor_ciel(map, i) == 0)
+				return (printf("Texture not found\n"));
+		}
+		i++;
 	}
-	else if (ft_strncmp(map->world_map[i], "SO", 2) == 0)
+	while (j <= i)
 	{
-		if(get_NO(map, i) == 0)
-			return (printf("Texture not found\n");
+		free(map->world_map[i]);
+		map->world_map[i] = NULL;
+		j++;
 	}
-	else if (ft_strncmp(map->world_map[i], "WE", 2) == 0)
+	map->world_map += i;
+	printf("path_NO: %s\n", map->path_NO);
+	printf("path_SO: %s\n", map->path_SO);
+	printf("path_WE: %s\n", map->path_WE);
+	printf("path_EA: %s\n", map->path_EA);
+	printf("floor: %s\n", map->floor);
+	printf("ciel: %s\n", map->ciel);
+
+/*
+	printf("world_map:\n");
+	while (map->world_map[i])
 	{
-		if(get_NO(map, i) == 0)
-			return (printf("Texture not found\n");
-	}
-	else if (ft_strncmp(map->world_map[i], "EA", 2) == 0)
-	{
-		if(get_NO(map, i) == 0)
-			return (printf("Texture not found\n");
-	}
+		printf("%s\n", map->world_map[i]);
+		i++;
+	} */
+	return (1); 
+}
+
+int	floor_ciel(t_map *map, int i)
+{
+	if (map->world_map[i][0] == 'F')
+			map->floor = ft_substr(map->world_map[i], 1, 
+						ft_strlen(map->world_map[i]) - 1);
+	else
+			map->ciel = ft_substr(map->world_map[i], 1, 
+						ft_strlen(map->world_map[i]) - 1);
+	return (1);
+}
+
+int	not_map(t_map *map, int i)
+{
+	if (map->world_map[i][0] == '1')
+		return (0);
 	return (1);
 }
 
 int	get_NO(t_map *map, int i)
 {
 	int fd;
-	map->world_map[i] += 2;
-	if ((fd = open(map->world_map[i], O_RDONLY) > 0))
-	{	
-		map->path_NO = ft_strdup(map->world_map[i]);
+
+	map->path_NO = ft_substr(map->world_map[i], 2, 
+						ft_strlen(map->world_map[i]) - 2);
+	if ((fd = open(map->path_NO, O_RDONLY) > 0))
 		return (1);
+	else
+	{
+		free(map->path_NO);
+		return (0);
 	}
-	return (0);
 }
 
 int	get_SO(t_map *map, int i)
 {
 	int fd;
-	map->world_map[i] += 2;
-	if ((fd = open(map->world_map[i], O_RDONLY) > 0))
-	{	
-		map->path_NO = ft_strdup(map->world_map[i]);
+	map->path_SO = ft_substr(map->world_map[i], 2, 
+						ft_strlen(map->world_map[i]) - 2);
+	if ((fd = open(map->path_SO, O_RDONLY) > 0))
 		return (1);
-	}
-	return (0);
-}
-
-int	textures
-	if (ft_strncmp(map->world_map[i], "WE", 2) == 0)
+	else
 	{
-		map->world_map[i] += 2;
-	//	ft_printf("my string is: %s\n", map->world_map[i]);
-		if (open(map->world_map[i], O_RDONLY) > 0)
-			map->path_NO = ft_strdup(map->world_map[i]);	
-		else
-			return (ft_printf("Texture not found\n"));
+		free(map->path_SO);
+		return (0);
 	}
-	ft_printf("Chegay\n");
-	return (1);
 }
 
-/*
-int	textures_path(t_map *map)
+int	get_WE(t_map *map, int i)
 {
-	(void)map;
-	ft_printf("%i\n", ft_strncmp(map->world_map[i], "NO", 2));
+	int fd;
 
+	map->path_WE = ft_substr(map->world_map[i], 2, 
+						ft_strlen(map->world_map[i]) - 2);
+	if ((fd = open(map->path_WE, O_RDONLY) > 0))
+		return (1);
+	else
+	{
+		free(map->path_WE);
+		return (0);
+	}
+}
 
-} */
+int	get_EA(t_map *map, int i)
+{
+	int fd;
+
+	map->path_EA = ft_substr(map->world_map[i], 2, 
+						ft_strlen(map->world_map[i]) - 2);
+	if ((fd = open(map->path_EA, O_RDONLY) > 0))
+		return (1);
+	else
+	{
+		free(map->path_EA);
+		return (0);
+	}
+}
+
