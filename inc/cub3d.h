@@ -48,6 +48,10 @@ int	ft_is_cub(char *haystack);
 int	ft_is_cub(char *haystack);
 int	verification_main(char **argv, int argc, t_data *data);
 
+// FREE_MAIN.C
+void	free_main(t_data *data);
+void	free_matrix(t_map *map);
+
 // 	TEXTURES_PATH
 int	textures_main(t_map *map);
 int	get_NO(t_map *map, int i);

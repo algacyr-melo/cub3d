@@ -35,5 +35,6 @@ int	main( int argc, char **argv)
 	set_hooks(&data);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_loop(data.mlx);
+	free_main(&data);
 	return (0);
 }
