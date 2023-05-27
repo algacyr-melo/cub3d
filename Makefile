@@ -10,7 +10,8 @@ SRC			=	src/main.c \
 			  	src/verification.c \
 				src/create_map.c \
 				src/validate_map.c \
-				src/textures_path.c
+				src/textures_path.c \
+				src/free_main.c
 
 OBJ			= $(SRC:.c=.o)
 
