@@ -6,15 +6,12 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/25 22:34:47 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/27 04:36:50 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-//# define SCREEN_WIDTH	1200
-//# define SCREEN_HEIGHT	1000
 
 # define SCREEN_WIDTH	800
 # define SCREEN_HEIGHT	600
@@ -22,13 +19,7 @@
 # define TITLE			"Hello, Raycasting"
 
 # define ROT_SPEED		0.1
-# define MOVE_SPEED		0.3
-
-//only works with the tutorial map
-# define MAP_WIDTH		24
-# define MAP_HEIGHT		24
-
-extern int world_map[MAP_WIDTH][MAP_HEIGHT];
+# define MOVE_SPEED		0.5
 
 //# include "mlx_linux/mlx.h"
 # include <mlx.h>
@@ -37,42 +28,19 @@ extern int world_map[MAP_WIDTH][MAP_HEIGHT];
 # include <stdio.h>
 # include <stdint.h>
 # include "maps.h"
+# include "types.h"
+
 //# include "../libft/libft.h" 
 # include "../libft/header/libft.h" 
 # include "../libft/header/ft_printf.h"
 # include "../libft/header/get_next_line.h"
 # include <fcntl.h>
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_img;
-
-typedef struct s_line
-{
-	int	x;
-	int	height;
-	int	y_start;
-	int	y_end;
-	int	color;
-}		t_line;
-
-typedef struct s_data
-{
-	t_map	map;
-	void	*mlx;
-	void	*win;
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-}			t_data;
+#ifdef __linux__
+# include "../inc/hooks_linux.h"
+#elif defined(__APPLE__)
+# include "../inc/hooks_mac.h"
+#endif
 
 // VERIFICATION.C
 int	validate_cub(char *map_name);

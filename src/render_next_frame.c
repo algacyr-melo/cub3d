@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/25 20:44:36 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/27 04:28:41 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	render_next_frame(t_data *data)
 	int			tex_height;
 
 	//load texture
-	tex.img = mlx_xpm_file_to_image(data->mlx, "./textures/purplestone.xpm", &tex_width, &tex_height);
+	tex.img = mlx_xpm_file_to_image(data->mlx, data->map.path_EA, &tex_width, &tex_height);
 	set_image_data(&tex);
 
 	//create blank frame
@@ -95,7 +95,7 @@ int	render_next_frame(t_data *data)
 				side = 1;
 			}
 			//check if ray has hit a wall
-			if (world_map[map_x][map_y] > 0) hit = 1;
+			if (data->map.world_map[map_x][map_y] == '1') hit = 1;
 		}
 
 		//calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
@@ -115,7 +115,6 @@ int	render_next_frame(t_data *data)
 			vline.y_end = SCREEN_HEIGHT - 1;
 
 		//texturing calculations
-	//	int texNum = world_map[map_x][map_y] - 1; // subtracted from it so that texture 0 can be used!
 
 		//calculate value of wall_x
 		double	wall_x; //where exactly the wall was hit
@@ -153,7 +152,7 @@ int	render_next_frame(t_data *data)
 			int	color = *(uint32_t *)(tex.addr + (tex_x * (tex.bits_per_pixel / 8) + (tex_y * tex.line_length)));
 
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if(side == 1)	color = (color >> 1) & 8355711;
+			if(side == 0)	color = (color >> 1) & 8355711;
 			screen_buffer[y][vline.x] = color;
 		}
 		vline.x++;

@@ -1,5 +1,5 @@
-#ifndef KEYCODES_MAC_H
-#define KEYCODES_MAC_H
+#ifndef HOOKS_MAC_H
+# define HOOKS_MAC_H
 
 // macOS keycodes
 enum
@@ -18,8 +18,5 @@ enum
 {
 	ON_KEYDOWN = 2,
 	ON_DESTROY = 17
-
 };
-
-#endif // KEYCODES_MAC_H
-
+#endif // HOOKS_MAC_H

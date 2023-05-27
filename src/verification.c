@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/25 21:52:04 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/27 00:15:25 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,11 @@ int	verification_main(char **argv, int argc, t_data *data)
 	}
 	if(validate_main(&data->map) == 0)
 		return (0);
-	printf("\n\n");
-	printf("Valor de map->path_NO: %s\n", data->map.path_NO);
-	printf("Valor de map->path_SO: %s\n", data->map.path_SO);
-	printf("Valor de map->path_WE: %s\n", data->map.path_WE);
-	printf("Valor de map->path_EA: %s\n", data->map.path_EA);
-	
-	
-	
-	
+	//printf("\n\n");
+	//printf("Valor de map->path_NO: %s\n", data->map.path_NO);
+	//printf("Valor de map->path_SO: %s\n", data->map.path_SO);
+	//printf("Valor de map->path_WE: %s\n", data->map.path_WE);
+	//printf("Valor de map->path_EA: %s\n", data->map.path_EA);
 	return (1);
 }
 

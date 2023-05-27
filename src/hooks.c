@@ -6,18 +6,11 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:11 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/24 04:28:07 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/27 04:27:24 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-#include <stdio.h>
-
-#ifdef __linux__
-# include "../inc/hooks_linux.h"
-#elif defined(__APPLE__)
-# include "../inc/hooks_mac.h"
-#endif
 
 void	handle_exit(t_data *data)
 {
@@ -31,74 +24,145 @@ int	handle_destroy(t_data *data)
 	return (0);
 }
 
+typedef struct s_plane_vector
+{
+	double	x;
+	double	y;
+}			t_plane_vector;
+
+typedef struct s_dir_vector
+{
+	double	x;
+	double	y;
+}			t_dir_vector;
+
 void	rotate_left(t_data *data)
 {
-	// both camera direction and camera plane must be rotated
-	double oldDirX = data->dir_x;
-    data->dir_x = data->dir_x * cos(ROT_SPEED) - data->dir_y * sin(ROT_SPEED);
-    data->dir_y = oldDirX * sin(ROT_SPEED) + data->dir_y * cos(ROT_SPEED);
+	double				old_dir_x;
+	double				old_plane_x;
+	t_dir_vector		dir;
+	t_plane_vector		plane;
 
-    double oldPlaneX = data->plane_x;
-    data->plane_x = data->plane_x * cos(ROT_SPEED) - data->plane_y * sin(ROT_SPEED);
-    data->plane_y = oldPlaneX * sin(ROT_SPEED) + data->plane_y * cos(ROT_SPEED);
+	// both camera direction and camera plane must be rotated
+	dir.x = data->dir_x;
+	dir.y = data->dir_y;
+	old_dir_x = dir.x;
+    data->dir_x = dir.x * cos(ROT_SPEED) - dir.y * sin(ROT_SPEED);
+    data->dir_y = old_dir_x * sin(ROT_SPEED) + dir.y * cos(ROT_SPEED);
+
+	plane.x = data->plane_x;
+	plane.y = data->plane_y;
+    old_plane_x = plane.x;
+    data->plane_x = plane.x * cos(ROT_SPEED) - plane.y * sin(ROT_SPEED);
+    data->plane_y = old_plane_x * sin(ROT_SPEED) + plane.y * cos(ROT_SPEED);
 	return ;
 }
 
 void	rotate_right(t_data *data)
 {
-	// both camera direction and camera plane must be rotated
-	double oldDirX = data->dir_x;
-    data->dir_x = data->dir_x * cos(-ROT_SPEED) - data->dir_y * sin(-ROT_SPEED);
-    data->dir_y = oldDirX * sin(-ROT_SPEED) + data->dir_y * cos(-ROT_SPEED);
+	double				old_dir_x;
+	double				old_plane_x;
+	t_dir_vector		dir;
+	t_plane_vector		plane;
 
-    double oldPlaneX = data->plane_x;
-    data->plane_x = data->plane_x * cos(-ROT_SPEED) - data->plane_y * sin(-ROT_SPEED);
-    data->plane_y = oldPlaneX * sin(-ROT_SPEED) + data->plane_y * cos(-ROT_SPEED);
+	// both camera direction and camera plane must be rotated
+	dir.x = data->dir_x;
+	dir.y = data->dir_y;
+	old_dir_x = dir.x;
+    data->dir_x = dir.x * cos(-ROT_SPEED) - dir.y * sin(-ROT_SPEED);
+    data->dir_y = old_dir_x * sin(-ROT_SPEED) + dir.y * cos(-ROT_SPEED);
+
+	plane.x = data->plane_x;
+	plane.y = data->plane_y;
+	old_plane_x = plane.x;
+    data->plane_x = plane.x * cos(-ROT_SPEED) - plane.y * sin(-ROT_SPEED);
+    data->plane_y = old_plane_x * sin(-ROT_SPEED) + plane.y * cos(-ROT_SPEED);
 	return ;
 }
 
 void	move_forward(t_data *data)
 {
-	//debug
-	//printf("posX: %f\n", data->pos_x);
-	//printf("dirX: %f\n", data->dir_x);
+	char	**world_map;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
 
-	//printf("posY: %f\n", data->pos_y);
-	//printf("dirY: %f\n", data->dir_y);
-	
+	world_map = data->map.world_map;
+	pos_x = data->pos_x;
+	pos_y = data->pos_y;
+	dir_x = data->dir_x;
+	dir_y = data->dir_y;
+
 	// move forward if no wall in front of you
-	if(world_map[(int)(data->pos_x + data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
-		data->pos_x += data->dir_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * MOVE_SPEED)] == 0)
-		data->pos_y += data->dir_y * MOVE_SPEED;
+	if(world_map[(int)(pos_x + dir_x * MOVE_SPEED)][(int)pos_y] != '1')
+		data->pos_x += dir_x * MOVE_SPEED;
+	if(world_map[(int)pos_x][(int)(pos_y + dir_y * MOVE_SPEED)] != '1')
+		data->pos_y += dir_y * MOVE_SPEED;
 	return ;
 }
 
 void	move_backwards(t_data *data)
 {
+	char	**world_map;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+
+	world_map = data->map.world_map;
+	pos_x = data->pos_x;
+	pos_y = data->pos_y;
+	dir_x = data->dir_x;
+	dir_y = data->dir_y;
+
 	//move backwards if no wall behind you
-	if(world_map[(int)(data->pos_x - (data->dir_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
-		data->pos_x -= data->dir_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y - (data->dir_y * MOVE_SPEED))] == 0)
-		data->pos_y -= data->dir_y * MOVE_SPEED;
+	if(world_map[(int)(pos_x - dir_x * MOVE_SPEED)][(int)pos_y] != '1')
+		data->pos_x -= dir_x * MOVE_SPEED;
+	if(world_map[(int)pos_x][(int)(pos_y - dir_y * MOVE_SPEED)] != '1')
+		data->pos_y -= dir_y * MOVE_SPEED;
 	return ;
 }
 
 void	move_right(t_data *data)
 {
-	if(world_map[(int)(data->pos_x + (data->plane_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
-		data->pos_x += data->plane_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y + (data->plane_y * MOVE_SPEED))] == 0)
-		data->pos_y += data->plane_y * MOVE_SPEED;
+	char	**world_map;
+	double	pos_x;
+	double	pos_y;
+	double	plane_x;
+	double	plane_y;
+
+	world_map = data->map.world_map;
+	pos_x = data->pos_x;
+	pos_y = data->pos_y;
+	plane_x = data->plane_x;
+	plane_y = data->plane_y;
+
+	if(world_map[(int)(pos_x + plane_x * MOVE_SPEED)][(int)pos_y] != '1')
+		data->pos_x += plane_x * MOVE_SPEED;
+	if(world_map[(int)pos_x][(int)(pos_y + plane_y * MOVE_SPEED)] != '1')
+		data->pos_y += plane_y * MOVE_SPEED;
 	return ;
 }
 
 void	move_left(t_data *data)
 {
-	if(world_map[(int)(data->pos_x - (data->plane_x * MOVE_SPEED))][(int)(data->pos_y)] == 0)
-		data->pos_x -= data->plane_x * MOVE_SPEED;
-	if(world_map[(int)(data->pos_x)][(int)(data->pos_y - (data->plane_y * MOVE_SPEED))] == 0)
-		data->pos_y -= data->plane_y * MOVE_SPEED;
+	char	**world_map;
+	double	pos_x;
+	double	pos_y;
+	double	plane_x;
+	double	plane_y;
+
+	world_map = data->map.world_map;
+	pos_x = data->pos_x;
+	pos_y = data->pos_y;
+	plane_x = data->plane_x;
+	plane_y = data->plane_y;
+
+	if(world_map[(int)(pos_x - plane_x * MOVE_SPEED)][(int)pos_y] != '1')
+		data->pos_x -= plane_x * MOVE_SPEED;
+	if(world_map[(int)pos_x][(int)(pos_y - plane_y * MOVE_SPEED)] != '1')
+		data->pos_y -= plane_y * MOVE_SPEED;
 	return ;
 }
 

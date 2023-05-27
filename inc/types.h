@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks_linux.h                                      :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 18:12:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/27 04:24:15 by almelo           ###   ########.fr       */
+/*   Created: 2023/05/27 04:36:07 by almelo            #+#    #+#             */
+/*   Updated: 2023/05/27 04:37:22 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HOOKS_LINUX_H
-# define HOOKS_LINUX_H
+#include "cub3d.h"
 
-// Linux keycodes
-enum
+typedef struct s_data
 {
-	ESC = 65307,
-	W = 119,
-	A = 97,
-	S = 115,
-	D = 100,
-	LEFT_ARROW = 65361,
-	RIGHT_ARROW = 65363
-};
+	t_map	map;
+	void	*mlx;
+	void	*win;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}			t_data;
 
-// MLX events
-enum
+typedef struct s_img
 {
-	ON_KEYDOWN = 2,
-	ON_DESTROY = 17
-};
-#endif
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_img;
+
+typedef struct s_line
+{
+	int	x;
+	int	height;
+	int	y_start;
+	int	y_end;
+	int	color;
+}		t_line;
