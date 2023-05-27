@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:11 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/27 04:27:24 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/27 04:53:42 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ int	handle_destroy(t_data *data)
 	handle_exit(data);
 	return (0);
 }
-
-typedef struct s_plane_vector
-{
-	double	x;
-	double	y;
-}			t_plane_vector;
-
-typedef struct s_dir_vector
-{
-	double	x;
-	double	y;
-}			t_dir_vector;
 
 void	rotate_left(t_data *data)
 {
