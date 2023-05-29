@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/25 22:22:59 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:22:31 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	biggest_width(t_map *map)
 	y = x + 1;
 	while (map->world_map[y])
 			y++;
-	map->window_height = y - x + 1;
+	map->window_height = y - x;
 	printf("window->height: %i\n", map->window_height);
 	map->window_width = ft_strlen(map->world_map[x]);
 	while(map->world_map[x])

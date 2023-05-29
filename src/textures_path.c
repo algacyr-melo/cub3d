@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:23:28 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/25 23:14:00 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:46:47 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,22 @@ int	textures_main(t_map *map)
 		}
 		i++;
 	}
-	while (j <= i)
+	while (j < i)
 	{
-		free(map->world_map[i]);
-		map->world_map[i] = NULL;
+		free(map->world_map[j]);
+		map->world_map[j] = NULL;
 		j++;
 	}
-	map->world_map += i;
-	printf("path_NO: %s\n", map->path_NO);
-	printf("path_SO: %s\n", map->path_SO);
-	printf("path_WE: %s\n", map->path_WE);
-	printf("path_EA: %s\n", map->path_EA);
-	printf("floor: %s\n", map->floor);
-	printf("ciel: %s\n", map->ciel);
-
 /*
-	printf("world_map:\n");
+	map->world_map += i;
+	i = 0;
 	while (map->world_map[i])
 	{
-		printf("%s\n", map->world_map[i]);
+		printf("%s com valor de i: %i\n", map->world_map[i], i);
 		i++;
-	} */
-	return (1); 
+	}
+	*/ // MAP CHECK
+	return (1);
 }
 
 int	floor_ciel(t_map *map, int i)
