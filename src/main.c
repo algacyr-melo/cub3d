@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:24:48 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 04:56:04 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:29:55 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main( int argc, char **argv)
 
 	data.mlx = mlx_init();
 	load_textures(&data);
+	load_colors(&data);
 	set_player_position(&data);
 	set_player_direction(&data);
 

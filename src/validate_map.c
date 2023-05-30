@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/30 16:37:19 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:46:23 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	validate_main(t_map *map)
 int	is_valid(t_map *map)
 {
 	int height;
-	int i;
+	//int i;
 
-	i = 1;
+	//i = 1;
 	height = 0;
 	while (map->world_map[height])
 		height++;

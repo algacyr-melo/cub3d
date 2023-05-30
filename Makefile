@@ -14,6 +14,7 @@ SRC			=	src/main.c \
 				src/load_textures.c \
 				src/set_player_position.c \
 				src/set_player_direction.c \
+				src/load_colors.c \
 
 OBJ			= $(SRC:.c=.o)
 

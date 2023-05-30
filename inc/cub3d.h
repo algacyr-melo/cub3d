@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 16:29:27 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:30:16 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	set_image_data(t_img *img);
 
 void	set_hooks(t_data *data);
 void	load_textures(t_data *data);
+void	load_colors(t_data *data);
 void	set_player_position(t_data *data);
 void	set_player_direction(t_data *data);
 int		render_next_frame(t_data *data);

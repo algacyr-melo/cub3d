@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 04:58:37 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:35:14 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,14 +144,12 @@ int	render_next_frame(t_data *data)
 		double	step = 1.0 * data->tex_height / vline.height;
 
 		// Draw ceil
-		uint32_t	color_ceil = 0x21ABCD; //blue
 		for (int y = 0; y < vline.y_start; y++)
-			screen_buffer[y][vline.x] = color_ceil;
+			screen_buffer[y][vline.x] = data->color_ceil;
 
 		// Draw floor
-		uint32_t	color_floor = 0x5F583C; //forest
 		for (int y = vline.y_end; y < SCREEN_HEIGHT; y++)
-			screen_buffer[y][vline.x] = color_floor;
+			screen_buffer[y][vline.x] = data->color_floor;
 
 		//starting texture coordinate
 		double	tex_pos = (vline.y_start - SCREEN_HEIGHT / 2 + vline.height / 2) * step;
