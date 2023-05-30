@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/27 04:28:41 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/30 01:24:53 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ int	render_next_frame(t_data *data)
 	t_line		vline;
 	uint32_t	screen_buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	t_img		tex;
-	int			tex_width;
-	int			tex_height;
-
-	//load texture
-	tex.img = mlx_xpm_file_to_image(data->mlx, data->map.path_EA, &tex_width, &tex_height);
-	set_image_data(&tex);
 
 	//create blank frame
 	img.img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -98,6 +92,23 @@ int	render_next_frame(t_data *data)
 			if (data->map.world_map[map_x][map_y] == '1') hit = 1;
 		}
 
+		// Set texture based on wall orientation
+		if (side == 0)
+		{
+			// Check map_x and map_y to get which side of the wall we are facing
+			if (map_x > data->pos_x)
+				tex = data->tex_SO;
+			else
+				tex = data->tex_NO;
+		}
+		else
+		{
+			if (map_y > data->pos_y)
+				tex = data->tex_WE;
+			else
+				tex = data->tex_EA;
+		}
+
 		//calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 		if (side == 0)	perp_wall_dist = (side_dist_x - delta_dist_x);
 		else			perp_wall_dist = (side_dist_y - delta_dist_y);
@@ -125,12 +136,16 @@ int	render_next_frame(t_data *data)
 		wall_x -= floor((wall_x));
 
 		//x coordinate on the texture
-		int	tex_x = (int)(wall_x * (double)(tex_width));
-		if (side == 0 && ray_dir_x > 0)	tex_x = tex_width - tex_x - 1;
-		if (side == 1 && ray_dir_y < 0)	tex_x = tex_width - tex_x - 1;
+		int	tex_x = (int)(wall_x * (double)(data->tex_width));
+		if (side == 0 && ray_dir_x > 0)	tex_x = data->tex_width - tex_x - 1;
+		if (side == 1 && ray_dir_y < 0)	tex_x = data->tex_width - tex_x - 1;
+		//int	tex_x = (int)(wall_x * (double)(tex_width));
+		//if (side == 0 && ray_dir_x > 0)	tex_x = tex_width - tex_x - 1;
+		//if (side == 1 && ray_dir_y < 0)	tex_x = tex_width - tex_x - 1;
 
 		//how much to increase the texture coordinate per screen pixel
-		double	step = 1.0 * tex_height / vline.height;
+		double	step = 1.0 * data->tex_height / vline.height;
+		//double	step = 1.0 * tex_height / vline.height;
 
 		// Draw ceil
 		uint32_t	color_ceil = 0x21ABCD; //blue
@@ -147,7 +162,7 @@ int	render_next_frame(t_data *data)
 		for (int y = vline.y_start; y < vline.y_end; y++)
 		{
 			//cast the texture coordinate to integer, and mask with (tex_width - 1) in case of overflow
-			int	tex_y = (int)tex_pos & (tex_height - 1);
+			int	tex_y = (int)tex_pos & (data->tex_height - 1);
 			tex_pos += step;
 			int	color = *(uint32_t *)(tex.addr + (tex_x * (tex.bits_per_pixel / 8) + (tex_y * tex.line_length)));
 
@@ -161,6 +176,5 @@ int	render_next_frame(t_data *data)
 	for(int y = 0; y < SCREEN_HEIGHT; y++) for(int x = 0; x < SCREEN_WIDTH; x++) screen_buffer[y][x] = 0; //clear the buffer instead of cls()
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
 	mlx_destroy_image(data->mlx, img.img);
-	mlx_destroy_image(data->mlx, tex.img);
 	return (0);
 }
