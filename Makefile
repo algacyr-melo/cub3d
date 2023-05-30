@@ -10,7 +10,10 @@ SRC			=	src/main.c \
 				src/create_map.c \
 				src/validate_map.c \
 				src/textures_path.c \
-				src/free_main.c
+				src/free_main.c \
+				src/load_textures.c \
+				src/set_player_position.c \
+				src/set_player_direction.c \
 
 OBJ			= $(SRC:.c=.o)
 

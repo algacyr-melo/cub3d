@@ -6,22 +6,20 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 01:11:03 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/30 04:55:56 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define TITLE			"Hello, Raycasting"
 # define SCREEN_WIDTH	800
 # define SCREEN_HEIGHT	600
-
-# define TITLE			"Hello, Raycasting"
-
 # define ROT_SPEED		0.1
 # define MOVE_SPEED		0.5
 
-//# include "mlx_linux/mlx.h"
+//# include "../mlx_linux/mlx.h"
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
@@ -36,6 +34,7 @@
 # include "../libft/header/get_next_line.h"
 # include <fcntl.h>
 
+// OS detection
 #ifdef __linux__
 # include "../inc/hooks_linux.h"
 #elif defined(__APPLE__)
@@ -72,12 +71,15 @@ int		wall_check(t_map *map);
 int		wall_check2(t_map *map);
 void	biggest_width(t_map *map);
 
-//set struct with mlx image data
+// Set struct with mlx image data
 void	set_image_data(t_img *img);
 
+void	set_hooks(t_data *data);
+void	load_textures(t_data *data);
+void	set_player_position(t_data *data);
+void	set_player_direction(t_data *data);
 int		render_next_frame(t_data *data);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_next_frame(t_img *img, uint32_t (*buffer)[SCREEN_WIDTH]);
 
-void	set_hooks(t_data *data);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 #endif

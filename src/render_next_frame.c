@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 01:24:53 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/30 04:58:37 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,9 @@ int	render_next_frame(t_data *data)
 		int	tex_x = (int)(wall_x * (double)(data->tex_width));
 		if (side == 0 && ray_dir_x > 0)	tex_x = data->tex_width - tex_x - 1;
 		if (side == 1 && ray_dir_y < 0)	tex_x = data->tex_width - tex_x - 1;
-		//int	tex_x = (int)(wall_x * (double)(tex_width));
-		//if (side == 0 && ray_dir_x > 0)	tex_x = tex_width - tex_x - 1;
-		//if (side == 1 && ray_dir_y < 0)	tex_x = tex_width - tex_x - 1;
 
 		//how much to increase the texture coordinate per screen pixel
 		double	step = 1.0 * data->tex_height / vline.height;
-		//double	step = 1.0 * tex_height / vline.height;
 
 		// Draw ceil
 		uint32_t	color_ceil = 0x21ABCD; //blue

@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 04:36:07 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 00:00:12 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/30 03:46:33 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 	t_img	tex_EA;
 	int		tex_width;
 	int		tex_height;
+	char	spawn_orientation;
 }			t_data;
 
 typedef struct s_line
