@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/29 15:22:31 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:37:19 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,47 +17,47 @@
 int	validate_main(t_map *map)
 {
 	if (textures_main(map) == 0)
-			return (0);
-	biggest_width(map);
-/*
-	if(wall_check(map))
-			return (1);
-	else
 	{
-		ft_printf("Not a valid map\n");
+		printf("Invalid textures\n");
 		return (0);
-	} */
+	}
+	biggest_width(map);
+	if (is_valid(map) == 0)
+	{
+		printf("Invalid map\n");
+		return (0);
+	}
 	return (1);
 }
 
-/*
 int	is_valid(t_map *map)
 {
-	int x;
-	int y;
+	int height;
+	int i;
 
-	x = map->map_start;
-	y = 0;
-	while (map->world_map[x][y])
-	{	
-		if (map->world_map[x][y] != 1)
-			return (0);
-		y++;
-	}
-	x++;
-	y = 0;
-	while(map->world_map[x])
+	i = 1;
+	height = 0;
+	while (map->world_map[height])
+		height++;
+	if (is_one(map, 0) == 0 || is_one(map, height - 1) == 0)
+		return (0);
+
+	return (1);
+}
+
+int is_one(t_map *map, int i)
+{
+	int j;
+
+	j = 0;
+	while (map->world_map[i][j])
 	{
-		while (map->world_map[x][y])
-		{		
-				if (map->world_map[x][y] == '0')
-					if (map->world_map[x - 1][y] != '1')
-						return (0);
-				y++;
-		}
-		x++;
+		if (map->world_map[i][j] != '1')
+			return (0);
+		j++;
 	}
-} */
+	return (1);
+}
 
 void	biggest_width(t_map *map)
 {

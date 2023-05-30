@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 04:55:56 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/30 16:29:27 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int		validate_main(t_map *map);
 int		wall_check(t_map *map);
 int		wall_check2(t_map *map);
 void	biggest_width(t_map *map);
-
+int 	is_one(t_map *map, int i);
+int		is_valid(t_map *map);
 // Set struct with mlx image data
 void	set_image_data(t_img *img);
 
