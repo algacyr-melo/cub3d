@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 17:30:16 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/31 02:25:49 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@
 # define SCREEN_WIDTH	800
 # define SCREEN_HEIGHT	600
 # define ROT_SPEED		0.1
-# define MOVE_SPEED		0.5
+# define MOVE_SPEED		0.25
 
-//# include "../mlx_linux/mlx.h"
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdint.h>
+
 # include "maps.h"
 # include "types.h"
+# include "raycaster.h"
+# include "img.h"
+# include "frame.h"
 
-//# include "../libft/libft.h" 
 # include "../libft/header/libft.h" 
 # include "../libft/header/ft_printf.h"
 # include "../libft/header/get_next_line.h"
@@ -72,6 +74,7 @@ int		wall_check2(t_map *map);
 void	biggest_width(t_map *map);
 int 	is_one(t_map *map, int i);
 int		is_valid(t_map *map);
+
 // Set struct with mlx image data
 void	set_image_data(t_img *img);
 

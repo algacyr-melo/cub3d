@@ -6,20 +6,14 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 04:36:07 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 17:05:14 by almelo           ###   ########.fr       */
+/*   Updated: 2023/05/31 02:25:10 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef TYPES_H
+# define TYPES_H
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_img;
+# include "img.h"
 
 typedef struct s_data
 {
@@ -43,15 +37,6 @@ typedef struct s_data
 	uint32_t	color_floor;
 }			t_data;
 
-typedef struct s_line
-{
-	int	x;
-	int	height;
-	int	y_start;
-	int	y_end;
-	int	color;
-}		t_line;
-
 typedef struct s_plane_vector
 {
 	double	x;
@@ -63,3 +48,4 @@ typedef struct s_dir_vector
 	double	x;
 	double	y;
 }			t_dir_vector;
+#endif
