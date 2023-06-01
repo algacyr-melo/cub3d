@@ -26,6 +26,11 @@ typedef struct s_map
 	char	**world_map;
 	char	*floor;
 	char	*ciel;
+    int     pos_x;
+    int     pos_y;
+    char    direction;
+    int     sign;
+	int		valid;
 } t_map;
 
 #endif
