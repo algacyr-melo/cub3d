@@ -33,15 +33,18 @@ int	validate_main(t_map *map)
 int	is_valid(t_map *map)
 {
 	int height;
-	//int i;
+	int i;
 
-	//i = 1;
+	i = 1;
 	height = 0;
 	while (map->world_map[height])
 		height++;
 	if (is_one(map, 0) == 0 || is_one(map, height - 1) == 0)
 		return (0);
-
+	if (nsow10(map, i) == 0)
+		return (0);
+	if(wall_spaces(map) == 0)
+		return (0);
 	return (1);
 }
 
@@ -81,48 +84,30 @@ void	biggest_width(t_map *map)
 	}
 }
 
-int	wall_check(t_map *map)
+int nsow10(t_map *map, int x)
 {
-	int	y;
+    int i;
 
-	y = 0;
-	while (map->world_map[0][y])
-	{
-		if (map->world_map[0][y] != '1')
-			return (0);
-		y++;
-	}
-	y = 0;
-	while (map->world_map[map->window_height - 1][y])
-	{
-		if (map->world_map[map->window_height - 1][y] != '1')
-			return (0);
-		y++;
-	} 
-	if (wall_check2(map) == 1)
-		return (1);
-	else
-		return (0);
+    i = 0;
+    if (map->world_map[x] == NULL)
+        return (1);
+    while (map->world_map[x][i])
+    {
+        if (map->world_map[x][i] != '1' && map->world_map[x][i] != '0' &&
+			map->world_map[x][i] != 'N' && map->world_map[x][i] != 'O' 
+			&& map->world_map[x][i] != 'W' && map->world_map[x][i]!='S')
+            return (0);
+        if (map->world_map[x][i] == 'N' || map->world_map[x][i] == 'S' ||
+                map->world_map[x][i] == 'O' || map->world_map[x][i] == 'W')
+        {
+            map->pos_x = x;
+            map->pos_y = i;
+            map->direction = map->world_map[x][i];
+            map->sign++;
+        }
+        i++;
+    }
+    if (map->sign > 1)
+        return (0);
+    return (1);
 }
-
-int	wall_check2(t_map *map)
-{	
-	int	y;
-
-	y = 0;
-	while (map->world_map[y])
-	{
-		if (map->world_map[y][0] != '1')
-			return (0);
-		y++;
-	}
-	y = 0;
-	while (map->world_map[y])
-	{
-		if (map->world_map[y][ft_strlen(map->world_map[y]) - 1] != '1')
-			return (0);
-		y++;
-	}
-	return (1);
-}
-

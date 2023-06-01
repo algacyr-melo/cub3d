@@ -84,4 +84,58 @@ int	verification_main(char **argv, int argc, t_data *data)
 	return (1);
 }
 
+int wall_spaces(t_map *map)
+{
+    char **map_copy;
+    int i;
+
+    i = 0;
+    map_copy = malloc(sizeof(char **));
+    while(map->world_map[i])
+    {
+        map_copy[i] = ft_strdup(map->world_map[i]);
+        while ((int)ft_strlen(map_copy[i]) < map->window_width)
+		{
+			map_copy[i] = ft_strjoin(map_copy[i], "k");
+		}
+		i++;
+    }
+    i = -1;
+/*	while (map_copy[++i])
+	{
+		printf("%s\n", map_copy[i]);
+	} */
+	if (check_above(map_copy) == 0)
+			map->valid = -1;
+	i = -1;
+	while (map_copy[++i])
+		free(map_copy[i]);
+	free(map_copy);
+	if (map->valid == -1)
+			return (0);
+	return (1);
+}
+
+int	check_above(char **str)
+{
+	int i;
+	int j;
+
+	i = 1;
+	while (str[i])
+	{
+		j = 0;
+		while(str[i][j])
+		{
+			if (str[i][j] == '0')
+					if (str[i - 1][j] == 'k')
+					{	
+						return (0);
+					}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 

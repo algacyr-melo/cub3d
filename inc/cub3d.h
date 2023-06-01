@@ -46,6 +46,8 @@ int	validate_cub(char *map_name);
 int	ft_is_cub(char *haystack);
 int	ft_is_cub(char *haystack);
 int	verification_main(char **argv, int argc, t_data *data);
+int	wall_spaces(t_map *map);
+int check_above(char **str);
 
 // FREE_MAIN.C
 void	free_main(t_data *data);
@@ -67,11 +69,11 @@ char 	*remove_sp(char *str);
 
 // VALIDATE_MAP.C
 int		validate_main(t_map *map);
-int		wall_check(t_map *map);
-int		wall_check2(t_map *map);
 void	biggest_width(t_map *map);
 int 	is_one(t_map *map, int i);
 int		is_valid(t_map *map);
+int nsow10(t_map *map, int x);
+
 
 // Set struct with mlx image data
 void	set_image_data(t_img *img);

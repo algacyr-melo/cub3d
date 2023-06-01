@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:44:08 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 00:00:59 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/01 02:52:09 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,11 @@ typedef struct s_map
 	char	**world_map;
 	char	*floor;
 	char	*ciel;
-}			t_map;
+    int     pos_x;
+    int     pos_y;
+    char    direction;
+    int     sign;
+	int		valid;
+} t_map;
+
 #endif
