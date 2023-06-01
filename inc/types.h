@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 04:36:07 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/31 02:25:10 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/01 00:40:12 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TYPES_H
 
 # include "img.h"
+# include "maps.h"
 
 typedef struct s_data
 {
@@ -35,7 +36,8 @@ typedef struct s_data
 	char		spawn_orientation;
 	uint32_t	color_ceil;	
 	uint32_t	color_floor;
-}			t_data;
+	double		wall_x;
+}				t_data;
 
 typedef struct s_plane_vector
 {

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maps.h                                             :+:      :+:    :+:   */
+/*   texture.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
+/*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 18:44:08 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 00:00:59 by almelo           ###   ########.fr       */
+/*   Created: 2023/05/31 23:05:59 by almelo            #+#    #+#             */
+/*   Updated: 2023/06/01 00:38:28 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAPS_H
-# define MAPS_H
+#ifndef TEXTURE_H
+# define TEXTURE_H
 
-typedef struct s_map
+typedef struct s_texture
 {
-	int		fd;
-	int		window_height;
-	int		window_width;
-	int		map_start;
-	char	*path_NO;
-	char	*path_SO;
-	char	*path_WE;
-	char	*path_EA;
-	char	**world_map;
-	char	*floor;
-	char	*ciel;
-}			t_map;
+	int			x;
+	int			y;
+	uint32_t	pixel;
+}				t_texture;
 #endif

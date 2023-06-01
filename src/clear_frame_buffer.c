@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_next_frame.c                                :+:      :+:    :+:   */
+/*   clear_frame_buffer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/06/01 02:48:07 by almelo           ###   ########.fr       */
+/*   Created: 2023/06/01 02:35:24 by almelo            #+#    #+#             */
+/*   Updated: 2023/06/01 02:39:17 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	render_next_frame(t_data *data)
+void	clear_frame_buffer(t_frame *frame)
 {
-	t_raycaster	rc;
-	t_frame		frame;
+	int	y;
+	int	x;
 
-	frame.img.img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	set_image_data(&frame.img);
-
-	raycaster_loop(&rc, data, &frame);
-	draw_next_frame(&frame.img, frame.buffer);
-	clear_frame_buffer(&frame);
-	mlx_put_image_to_window(data->mlx, data->win, frame.img.img, 0, 0);
-	mlx_destroy_image(data->mlx, frame.img.img);
-	return (0);
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			frame->buffer[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	return ;
 }

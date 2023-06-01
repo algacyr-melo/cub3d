@@ -15,6 +15,13 @@ SRC			=	src/main.c \
 				src/set_player_position.c \
 				src/set_player_direction.c \
 				src/load_colors.c \
+				src/buffer_wall_vertical_line.c \
+				src/set_texture_x.c \
+				src/set_wall_pixel_x.c \
+				src/buffer_ceil_v_line.c \
+				src/buffer_floor_v_line.c \
+				src/raycaster_loop.c \
+				src/clear_frame_buffer.c \
 
 OBJ			= $(SRC:.c=.o)
 

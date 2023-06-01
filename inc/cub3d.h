@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/31 02:25:49 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/01 02:42:12 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@
 # include <stdio.h>
 # include <stdint.h>
 
-# include "maps.h"
 # include "types.h"
 # include "raycaster.h"
-# include "img.h"
 # include "frame.h"
 
 # include "../libft/header/libft.h" 
@@ -84,7 +82,14 @@ void	load_colors(t_data *data);
 void	set_player_position(t_data *data);
 void	set_player_direction(t_data *data);
 int		render_next_frame(t_data *data);
+void	raycaster_loop(t_raycaster *rc, t_data *data, t_frame *frame);
+void	set_texture_x(t_raycaster *rc, t_data *data);
+void	set_wall_pixel_x(t_raycaster *rc, t_data *data);
+void	buffer_ceil_v_line(t_raycaster *rc, t_data *data, t_frame *frame);
+void	buffer_floor_v_line(t_raycaster *rc, t_data *data, t_frame *frame);
+void	buffer_wall_v_line(t_raycaster *rc, t_data *data, t_frame *frame);
 void	draw_next_frame(t_img *img, uint32_t (*buffer)[SCREEN_WIDTH]);
+void	clear_frame_buffer(t_frame *frame);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 #endif
