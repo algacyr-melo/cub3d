@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 04:49:13 by almelo            #+#    #+#             */
-/*   Updated: 2023/05/30 04:50:06 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/02 00:52:59 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	is_player(int c)
 {
 	return (c == 'N'
-			|| c == 'S'
-			|| c == 'E'
-			|| c == 'W');
+		|| c == 'S'
+		|| c == 'E'
+		|| c == 'W');
 }
 
 void	set_player_position(t_data *data)

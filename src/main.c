@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:24:48 by almelo            #+#    #+#             */
-/*   Updated: 2023/06/01 21:49:02 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/01 23:53:04 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,11 @@ int	main( int argc, char **argv)
 
 	if (!verification_main(argv, argc, &data))
 		return (0);
-
-
 	data.mlx = mlx_init();
 	load_textures(&data);
 	load_colors(&data);
 	set_player_position(&data);
 	set_player_direction(&data);
-
 	data.win = mlx_new_window(data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, TITLE);
 	set_hooks(&data);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);

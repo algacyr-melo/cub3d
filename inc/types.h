@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 04:36:07 by almelo            #+#    #+#             */
-/*   Updated: 2023/06/01 00:40:12 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/02 01:18:47 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef struct s_data
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
-	t_img		tex_NO;
-	t_img		tex_SO;
-	t_img		tex_WE;
-	t_img		tex_EA;
+	t_img		tex_no;
+	t_img		tex_so;
+	t_img		tex_we;
+	t_img		tex_ea;
 	int			tex_width;
 	int			tex_height;
 	char		spawn_orientation;

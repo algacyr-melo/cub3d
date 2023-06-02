@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_next_frame.c                                :+:      :+:    :+:   */
+/*   dda_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 15:55:33 by almelo            #+#    #+#             */
-/*   Updated: 2023/06/01 23:52:49 by almelo           ###   ########.fr       */
+/*   Created: 2023/06/02 00:12:22 by almelo            #+#    #+#             */
+/*   Updated: 2023/06/02 00:33:23 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	render_next_frame(t_data *data)
+void	dda_loop(t_raycaster *rc, t_data *data)
 {
-	t_raycaster	rc;
-	t_frame		frame;
-
-	frame.img.img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	set_image_data(&frame.img);
-	raycaster_loop(&rc, data, &frame);
-	draw_next_frame(&frame.img, frame.buffer);
-	clear_frame_buffer(&frame);
-	mlx_put_image_to_window(data->mlx, data->win, frame.img.img, 0, 0);
-	mlx_destroy_image(data->mlx, frame.img.img);
-	return (0);
+	rc->hit = 0;
+	while (rc->hit == 0)
+	{
+		if (rc->side_dist_x < rc->side_dist_y)
+		{
+			rc->side_dist_x += rc->delta_dist_x;
+			rc->map_x += rc->step_x;
+			rc->side = 0;
+		}
+		else
+		{
+			rc->side_dist_y += rc->delta_dist_y;
+			rc->map_y += rc->step_y;
+			rc->side = 1;
+		}
+		if (data->map.world_map[rc->map_x][rc->map_y] == '1')
+			rc->hit = 1;
+	}
+	return ;
 }

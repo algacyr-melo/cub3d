@@ -21,6 +21,17 @@ SRC			=	src/main.c \
 				src/buffer_ceil_v_line.c \
 				src/buffer_floor_v_line.c \
 				src/raycaster_loop.c \
+				src/calculate_ray_position.c \
+				src/calculate_ray_direction.c \
+				src/calculate_ray_step.c \
+				src/calculate_side_dist.c \
+				src/dda_loop.c \
+				src/set_wall_texture.c \
+				src/calculate_camera_dist.c \
+				src/calculate_wall_data.c \
+				src/set_delta_dist.c \
+				src/move.c \
+				src/rotate.c \
 				src/clear_frame_buffer.c \
 
 OBJ			= $(SRC:.c=.o)
