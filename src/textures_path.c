@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:23:28 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/02 15:09:40 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:37:56 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,21 @@ int	textures_main(t_map *map)
 			if(get_WE(map, i) == 0)
 				return (printf("Texture not found\n"));
 		}
+		textures_main2(map, i);
+		i++;
 	}
+	while (j < i)
+	{
+		free(map->world_map[j]);
+		map->world_map[j] = NULL;
+		j++;
+	}
+	map->world_map += i;
 	return (1);
 
 }
 
-int	textures_main2(t_map *map, int i, int j)
+int	textures_main2(t_map *map, int i)
 {
 	while(not_map(map, i))
 	{
@@ -58,13 +67,6 @@ int	textures_main2(t_map *map, int i, int j)
 		}
 		i++;
 	}
-	while (j < i)
-	{
-		free(map->world_map[j]);
-		map->world_map[j] = NULL;
-		j++;
-	}
-	map->world_map += i;
 	return (1);
 }
 
