@@ -6,18 +6,17 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:00:29 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 18:06:32 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:34:30 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/cub3d.h"
 
 void	create_map(t_data *data)
 {
-	char *str;
-	char *joker;
-	int len;
+	char	*str;
+	char	*joker;
+	int		len;
 
 	len = 0;
 	str = NULL;
@@ -27,7 +26,6 @@ void	create_map(t_data *data)
 	{
 		str = get_next_line(data->map.fd);
 		str = remove_sp(str);
-		// is_empty_line()  // must verify if the line is empty in the middle of the map. 
 		if (str == NULL)
 			break ;
 		joker = ft_strjoin(joker, str);
@@ -40,23 +38,23 @@ void	create_map(t_data *data)
 
 void	to_matrix(t_data *data, char *joker)
 {
+	int	i;
+
+	i = 0;
 	data->map.world_map = ft_split(joker, '\n');
-	int i = 0;
 	while (data->map.world_map[i])
 		i++;
 	data->map.window_height = i;
 	i = -1;
-	while (++i < data->map.window_height)
-			printf("%s\n", data->map.world_map[i]);
 	free(joker);
 }
 
-char *remove_sp(char *str)
+char	*remove_sp(char *str)
 {
-	char *ret;
-	char *joker;	
-	int begin;
-	int end;
+	char	*ret;
+	char	*joker;	
+	int		begin;
+	int		end;
 
 	if (str == NULL)
 		return (NULL);
@@ -64,18 +62,16 @@ char *remove_sp(char *str)
 	joker = NULL;
 	begin = 0;
 	end = 0;
-
 	while (str[begin])
 	{
 		begin = end;
 		while (str[end] != ' ' && str[end] != '\t' && str[end] != '\0')
 			end++;
 		joker = ft_substr(str, begin, end - begin);
-		while((str[end] == ' ' || str[end] == '\t') && str[end] != '\0')
+		while ((str[end] == ' ' || str[end] == '\t') && str[end] != '\0')
 				end++;
 		ret = ft_strjoin(ret, joker);
 	}
 	free(str);
 	return (ret);
 }
-

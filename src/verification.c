@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 18:17:40 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:12:02 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	validate_cub(char *map_name)
 
 int	verification_main(char **argv, int argc, t_data *data)
 {
-
 	if (argc != 2)
 	{
 		ft_printf("Wrong input :/\nUsage: ./cub3d path_to_.cub\n");
@@ -67,80 +66,68 @@ int	verification_main(char **argv, int argc, t_data *data)
 		ft_printf("Not a .cub :/\n");
 		return (0);
 	}
-	if ((data->map.fd = open(argv[1], O_RDONLY)) > 0)
+	data->map.fd = open(argv[1], O_RDONLY);
+	if (data->map.fd > 0)
 		create_map(data);
 	else
 	{
 		ft_printf("Map and textures instruction were not found\n");
 		return (0);
 	}
-	if(validate_main(&data->map) == 0)
+	if (validate_main(&data->map) == 0)
 		return (0);
-	//printf("\n\n");
-	//printf("Valor de map->path_NO: %s\n", data->map.path_NO);
-	//printf("Valor de map->path_SO: %s\n", data->map.path_SO);
-	//printf("Valor de map->path_WE: %s\n", data->map.path_WE);
-	//printf("Valor de map->path_EA: %s\n", data->map.path_EA);
 	return (1);
 }
 
-int wall_spaces(t_map *map)
+int	wall_spaces(t_map *map)
 {
-    char **map_copy;
-    int i;
+	char	**map_copy;
+	int		i;
 
-    i = 0;
-   	map_copy = ft_calloc(map->window_height, sizeof(char *));
-	while(map->world_map[i])
-    {
-        map_copy[i] = ft_strdup(map->world_map[i]);
-        while ((int)ft_strlen(map_copy[i]) < map->window_width)
+	i = 0;
+	map_copy = ft_calloc(map->window_height, sizeof(char *));
+	while (map->world_map[i])
+	{
+		map_copy[i] = ft_strdup(map->world_map[i]);
+		while ((int)ft_strlen(map_copy[i]) < map->window_width)
 		{
 			map_copy[i] = ft_strjoin(map_copy[i], "k");
 		}
 		i++;
-    }
-    i = 0;
-	while (i < map->window_height)
-	{
-		printf("%s\n", map_copy[i]);
-		i++;
 	}
 	if (check_above(map_copy, map->window_height) == 0)
-			map->valid = -1;
+		map->valid = -1;
 	i = 0;
 	while (i < map->window_height)
 	{
 		free(map_copy[i]);
 		i++;
 	}
-//	free(map_copy);
 	if (map->valid == -1)
-			return (0);
+		return (0);
 	return (1);
 }
 
 int	check_above(char **str, int height)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	while (i < height)
 	{
 		j = 0;
-		while(str[i][j])
+		while (str[i][j])
 		{
 			if (str[i][j] == '0')
-					if (str[i - 1][j] == 'k' || str[i][j + 1] == 'k'
-					 || str[i][j - 1] == 'k')
-					{	
-						return (0);
-					}
+			{
+				if (str[i - 1][j] == 'k' || str[i][j + 1] == 'k' ||
+				str[i][j - 1] == 'k')
+					return (0);
+			}
 			j++;
 		}
 		i++;
 	}
 	return (1);
 }
-
