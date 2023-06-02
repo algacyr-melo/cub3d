@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:23:28 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/29 22:18:11 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/02 15:09:40 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,16 @@ int	textures_main(t_map *map)
 			if(get_WE(map, i) == 0)
 				return (printf("Texture not found\n"));
 		}
-		else if (ft_strncmp(map->world_map[i], "EA", 2) == 0)
+	}
+	return (1);
+
+}
+
+int	textures_main2(t_map *map, int i, int j)
+{
+	while(not_map(map, i))
+	{
+		if (ft_strncmp(map->world_map[i], "EA", 2) == 0)
 		{
 			if(get_EA(map, i) == 0)
 				return (printf("Texture not found\n"));
@@ -56,14 +65,6 @@ int	textures_main(t_map *map)
 		j++;
 	}
 	map->world_map += i;
-/*
-	i = 0;
-	while (map->world_map[i])
-	{
-		printf("%s com valor de i: %i\n", map->world_map[i], i);
-		i++;
-	}
-	*/ // MAP CHECK
 	return (1);
 }
 
@@ -80,7 +81,7 @@ int	floor_ciel(t_map *map, int i)
 
 int	not_map(t_map *map, int i)
 {
-	if (map->world_map[i][0] == '1')
+	if (map->world_map[i][0] == '1' || map->world_map[i] == NULL)
 		return (0);
 	return (1);
 }

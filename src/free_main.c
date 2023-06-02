@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 22:36:22 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 22:37:05 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:18:29 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 void	free_main(t_data *data)
 {
-	free(data->map.path_NO);
-	free(data->map.path_SO);
-	free(data->map.path_WE);
-	free(data->map.path_EA);
-	free(data->map.floor);
-	free(data->map.ciel);
-	free_matrix(&data->map);
+	if (data->map.path_NO != NULL)
+		free(data->map.path_NO);
+	if (data->map.path_SO != NULL)
+		free(data->map.path_SO);
+	if (data->map.path_WE != NULL)
+		free(data->map.path_WE);
+	if (data->map.path_EA != NULL)
+		free(data->map.path_EA);
+	if (data->map.floor != NULL)
+		free(data->map.floor);
+	if (data->map.ciel != NULL)
+		free(data->map.ciel);
+	if (data->map.world_map != NULL)
+		free_matrix(&data->map);
 }
 
 void	free_matrix(t_map *map)

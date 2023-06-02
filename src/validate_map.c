@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 22:38:58 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:52:46 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	nsow10(t_map *map, int x)
 		while (map->world_map[x][i])
 		{
 			if (map->world_map[x][i] != '1' && map->world_map[x][i] != '0' &&
-				map->world_map[x][i] != 'N' && map->world_map[x][i] != 'O'
+				map->world_map[x][i] != 'N' && map->world_map[x][i] != 'E'
 				&& map->world_map[x][i] != 'W' && map->world_map[x][i] != 'S')
 				return (0);
 			if (map->world_map[x][i] == 'N' || map->world_map[x][i] == 'S' ||
