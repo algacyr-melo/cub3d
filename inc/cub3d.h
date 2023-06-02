@@ -6,7 +6,7 @@
 /*   By: almelo <almelo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:09 by almelo            #+#    #+#             */
-/*   Updated: 2023/06/01 02:42:12 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/01 15:49:29 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_is_cub(char *haystack);
 int	ft_is_cub(char *haystack);
 int	verification_main(char **argv, int argc, t_data *data);
 int	wall_spaces(t_map *map);
-int check_above(char **str);
+int check_above(char **str, int height);
 
 // FREE_MAIN.C
 void	free_main(t_data *data);
@@ -72,7 +72,7 @@ int		validate_main(t_map *map);
 void	biggest_width(t_map *map);
 int 	is_one(t_map *map, int i);
 int		is_valid(t_map *map);
-int nsow10(t_map *map, int x);
+int 	nsow10(t_map *map, int x);
 
 
 // Set struct with mlx image data

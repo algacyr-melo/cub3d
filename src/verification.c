@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/27 00:15:25 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/01 18:17:40 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int wall_spaces(t_map *map)
     int i;
 
     i = 0;
-    map_copy = malloc(sizeof(char **));
-    while(map->world_map[i])
+   	map_copy = ft_calloc(map->window_height, sizeof(char *));
+	while(map->world_map[i])
     {
         map_copy[i] = ft_strdup(map->world_map[i]);
         while ((int)ft_strlen(map_copy[i]) < map->window_width)
@@ -100,35 +100,40 @@ int wall_spaces(t_map *map)
 		}
 		i++;
     }
-    i = -1;
-/*	while (map_copy[++i])
+    i = 0;
+	while (i < map->window_height)
 	{
 		printf("%s\n", map_copy[i]);
-	} */
-	if (check_above(map_copy) == 0)
+		i++;
+	}
+	if (check_above(map_copy, map->window_height) == 0)
 			map->valid = -1;
-	i = -1;
-	while (map_copy[++i])
+	i = 0;
+	while (i < map->window_height)
+	{
 		free(map_copy[i]);
-	free(map_copy);
+		i++;
+	}
+//	free(map_copy);
 	if (map->valid == -1)
 			return (0);
 	return (1);
 }
 
-int	check_above(char **str)
+int	check_above(char **str, int height)
 {
 	int i;
 	int j;
 
 	i = 1;
-	while (str[i])
+	while (i < height)
 	{
 		j = 0;
 		while(str[i][j])
 		{
 			if (str[i][j] == '0')
-					if (str[i - 1][j] == 'k')
+					if (str[i - 1][j] == 'k' || str[i][j + 1] == 'k'
+					 || str[i][j - 1] == 'k')
 					{	
 						return (0);
 					}

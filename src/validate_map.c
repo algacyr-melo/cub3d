@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/30 16:46:23 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/01 18:05:42 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	is_valid(t_map *map)
 		height++;
 	if (is_one(map, 0) == 0 || is_one(map, height - 1) == 0)
 		return (0);
+	printf("%i\n", nsow10(map, i));
 	if (nsow10(map, i) == 0)
 		return (0);
 	if(wall_spaces(map) == 0)
@@ -89,25 +90,29 @@ int nsow10(t_map *map, int x)
     int i;
 
     i = 0;
-    if (map->world_map[x] == NULL)
-        return (1);
-    while (map->world_map[x][i])
-    {
-        if (map->world_map[x][i] != '1' && map->world_map[x][i] != '0' &&
-			map->world_map[x][i] != 'N' && map->world_map[x][i] != 'O' 
-			&& map->world_map[x][i] != 'W' && map->world_map[x][i]!='S')
-            return (0);
-        if (map->world_map[x][i] == 'N' || map->world_map[x][i] == 'S' ||
-                map->world_map[x][i] == 'O' || map->world_map[x][i] == 'W')
-        {
-            map->pos_x = x;
-            map->pos_y = i;
-            map->direction = map->world_map[x][i];
-            map->sign++;
-        }
-        i++;
-    }
-    if (map->sign > 1)
-        return (0);
-    return (1);
+//    if (map->world_map[x] == NULL)
+//        return (1);
+    while (x < map->window_height)
+	{
+		while (map->world_map[x][i])
+		{
+        	if (map->world_map[x][i] != '1' && map->world_map[x][i] != '0' &&
+				map->world_map[x][i] != 'N' && map->world_map[x][i] != 'O' 
+				&& map->world_map[x][i] != 'W' && map->world_map[x][i]!='S')
+            	return (0);
+        	if (map->world_map[x][i] == 'N' || map->world_map[x][i] == 'S' ||
+            	    map->world_map[x][i] == 'O' || map->world_map[x][i] == 'W')
+        	{
+            	map->pos_x = x;
+            	map->pos_y = i;
+            	map->direction = map->world_map[x][i];
+            	map->sign++;
+        	}
+        	i++;
+    	}
+    	if (map->sign > 1)
+			return (0);
+		x++;
+	}
+	return (1);
 }

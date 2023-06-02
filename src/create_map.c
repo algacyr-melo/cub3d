@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:00:29 by psydenst          #+#    #+#             */
-/*   Updated: 2023/05/25 22:16:58 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:06:32 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	to_matrix(t_data *data, char *joker)
 	while (data->map.world_map[i])
 		i++;
 	data->map.window_height = i;
-	i = 0;
+	i = -1;
+	while (++i < data->map.window_height)
+			printf("%s\n", data->map.world_map[i]);
 	free(joker);
 }
 
