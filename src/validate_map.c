@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 22:29:21 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:38:58 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	is_valid(t_map *map)
 		height++;
 	if (is_one(map, 0) == 0 || is_one(map, height - 1) == 0)
 		return (0);
-	printf("Valor de nsow10: %i\n", nsow10(map, i));
 	if (nsow10(map, i) == 0 || map->sign > 1)
 		return (0);
 	if (wall_spaces(map) == 0)
