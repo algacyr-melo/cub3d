@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/01 22:12:02 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:52:39 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,33 @@ int	verification_main(char **argv, int argc, t_data *data)
 	return (1);
 }
 
+/*
 int	wall_spaces(t_map *map)
 {
 	char	**map_copy;
 	int		i;
+	char	**joker;
+	int 	z;
 
+	z = 0;
 	i = 0;
-	map_copy = ft_calloc(map->window_height, sizeof(char *));
+	map_copy = malloc(sizeof(char **));
 	while (map->world_map[i])
 	{
-		map_copy[i] = ft_strdup(map->world_map[i]);
-		while ((int)ft_strlen(map_copy[i]) < map->window_width)
+		joker = ft_strdup(map->world_map[i]);
+		z = ft_strlen(joker);
+		while (z < map->window_width)
 		{
-			map_copy[i] = ft_strjoin(map_copy[i], "k");
+			map_copy[i] = ft_strjoin(joker, "k");
+			z++;
 		}
+		i++;
+		free(joker);
+	}
+	i = 0;
+	while (map_copy[i])
+	{
+		printf("%s\n", map_copy[i]);
 		i++;
 	}
 	if (check_above(map_copy, map->window_height) == 0)
@@ -106,7 +119,41 @@ int	wall_spaces(t_map *map)
 	if (map->valid == -1)
 		return (0);
 	return (1);
+} */
+
+int	wall_spaces(t_map *map)
+{
+	char	**map_copy;
+	int		i;
+	int		z;
+	int		j;
+
+	i = 0;
+	map_copy = malloc(sizeof(char **));
+	while (i < map->window_height)
+	{
+		j = 0;
+		z = map->window_width - ft_strlen(map->world_map[i]);
+		map_copy[i] = malloc(sizeof(char) * map->window_width);
+		while (j < map->window_width)
+		{
+			if (j < z)
+				map_copy[i][j] = map->world_map[i][j];
+			if (j >= z)
+				map_copy[i][j] = 'k';
+			j++;
+		}
+		i++;
+	}
+	int k = 0;
+	while(map_copy[k])
+	{
+		printf("%s\n", map_copy[k]);
+		k++;
+	}
+	return (1);
 }
+
 
 int	check_above(char **str, int height)
 {
