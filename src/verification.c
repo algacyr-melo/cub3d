@@ -79,77 +79,28 @@ int	verification_main(char **argv, int argc, t_data *data)
 	return (1);
 }
 
-/*
 int	wall_spaces(t_map *map)
 {
-	char	**map_copy;
-	int		i;
-	char	**joker;
-	int 	z;
-
-	z = 0;
-	i = 0;
-	map_copy = malloc(sizeof(char **));
-	while (map->world_map[i])
+	map->i = 0;
+	map->length = 0;
+	map->map_copy = malloc(sizeof(char *) * map->window_height);
+	map->i = -1;
+	while (map->i++ < map->window_height)
+		map->map_copy[map->i] = malloc(sizeof(char *) * (map->window_width + 1));
+	map->i = 0;
+	while (map->i < map->window_height)
 	{
-		joker = ft_strdup(map->world_map[i]);
-		z = ft_strlen(joker);
-		while (z < map->window_width)
+		map->j = 0;
+		while (map->j < map->window_width)
 		{
-			map_copy[i] = ft_strjoin(joker, "k");
-			z++;
+			if (map->world_map[map->i][map->j] != '\0')
+				map->map_copy[map->i][map->j] = map->world_map[map->i][map->j];
+			else
+				map->map_copy[map->i][map->j] = 'k';
+			map->j++;
 		}
-		i++;
-		free(joker);
-	}
-	i = 0;
-	while (map_copy[i])
-	{
-		printf("%s\n", map_copy[i]);
-		i++;
-	}
-	if (check_above(map_copy, map->window_height) == 0)
-		map->valid = -1;
-	i = 0;
-	while (i < map->window_height)
-	{
-		free(map_copy[i]);
-		i++;
-	}
-	if (map->valid == -1)
-		return (0);
-	return (1);
-} */
-
-int	wall_spaces(t_map *map)
-{
-	char	**map_copy;
-	int		i;
-	int		z;
-	int		j;
-
-	i = 0;
-	map_copy = malloc(sizeof(char **));
-	while (i < map->window_height)
-	{
-		j = 0;
-		z = map->window_width - ft_strlen(map->world_map[i]);
-		map_copy[i] = malloc(sizeof(char) * map->window_width);
-		while (j < map->window_width)
-		{
-			if (j < z)
-				map_copy[i][j] = map->world_map[i][j];
-			if (j >= z)
-				map_copy[i][j] = 'k';
-			j++;
-		}
-		i++;
-	}
-	int k = 0;
-	while(map_copy[k])
-	{
-		printf("%s\n", map_copy[k]);
-		k++;
+		map->map_copy[map->i][map->j] = '\0';
+		map->i++;
 	}
 	return (1);
 }
@@ -176,5 +127,9 @@ int	check_above(char **str, int height)
 		}
 		i++;
 	}
+	i = -1;
+	while (i++ < height)
+		free(str[i]);
+	free(str);
 	return (1);
 }

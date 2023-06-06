@@ -43,7 +43,8 @@ int	is_valid(t_map *map)
 		return (0);
 	if (nsow10(map, i) == 0 || map->sign > 1)
 		return (0);
-	if (wall_spaces(map) == 0)
+	wall_spaces(map);
+	if (check_above(map->map_copy, map->window_height) == 0)
 		return (0);
 	return (1);
 }
@@ -66,7 +67,10 @@ void	biggest_width(t_map *map)
 {
 	int	x;
 	int	y;
+	int i;
+	int length;
 
+	i = 0;
 	x = 0;
 	while (map->world_map[x] == NULL)
 			x++;
@@ -76,12 +80,14 @@ void	biggest_width(t_map *map)
 			y++;
 	map->window_height = y - x;
 	map->window_width = ft_strlen(map->world_map[x]);
-	while (map->world_map[x])
+	while (i < map->window_height)
 	{
-		if ((int)ft_strlen(map->world_map[x]) > map->window_width)
-			map->window_width = (int)ft_strlen(map->world_map[x]);
-		x++;
+		length = ft_strlen(map->world_map[i]);
+		if (length > map->window_width)
+				map->window_width = length;
+		i++;		
 	}
+	printf("valor de window_width: %i\n", map->window_width);
 }
 
 int	nsow10(t_map *map, int x)

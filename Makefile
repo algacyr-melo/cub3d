@@ -36,7 +36,7 @@ SRC			=	src/main.c \
 
 OBJ			= $(SRC:.c=.o)
 
-CC			= gcc
+CC			= clang
 
 CFLAGS		= -Wall -Wextra -Werror -g
 

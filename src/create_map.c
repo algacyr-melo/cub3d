@@ -76,6 +76,7 @@ char	*remove_sp(char *str)
 		while ((str[end] == ' ' || str[end] == '\t') && str[end] != '\0')
 				end++;
 		ret = ft_strjoin(ret, joker);
+		free(joker);
 	}
 	free(str);
 	return (ret);
