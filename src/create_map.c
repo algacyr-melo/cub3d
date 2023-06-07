@@ -30,9 +30,9 @@ void	create_map(t_data *data)
 		str = remove_sp(str);
 		if (str == NULL)
 			break ;
-//		temp = joker;
+		temp = joker;
 		joker = ft_strjoin(joker, str);
-//		free(temp);
+		free(temp);
 		free(str);
 		len++;
 	}
@@ -60,6 +60,7 @@ char	*remove_sp(char *str)
 	char	*joker;	
 	int		begin;
 	int		end;
+	char	*temp;
 
 	if (str == NULL)
 		return (NULL);
@@ -75,8 +76,11 @@ char	*remove_sp(char *str)
 		joker = ft_substr(str, begin, end - begin);
 		while ((str[end] == ' ' || str[end] == '\t') && str[end] != '\0')
 				end++;
+		temp = ret;
 		ret = ft_strjoin(ret, joker);
 		free(joker);
+		if (begin > 0)
+			free(temp);
 	}
 	free(str);
 	return (ret);
