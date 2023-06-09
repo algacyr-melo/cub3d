@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/02 22:52:39 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:45:37 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	check_above(char **str, int height)
 		i++;
 	}
 	i = -1;
-	while (i++ < height)
+	while (++i < height)
 		free(str[i]);
 	free(str);
 	return (1);

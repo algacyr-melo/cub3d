@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:03:20 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/02 14:52:46 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:47:50 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	biggest_width(t_map *map)
 				map->window_width = length;
 		i++;		
 	}
-	printf("valor de window_width: %i\n", map->window_width);
 }
 
 int	nsow10(t_map *map, int x)
