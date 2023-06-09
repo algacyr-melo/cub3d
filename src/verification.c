@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/09 18:45:37 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/09 20:50:58 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,28 @@ int	verification_main(char **argv, int argc, t_data *data)
 
 int	wall_spaces(t_map *map)
 {
+	int a;
+
 	map->i = 0;
 	map->length = 0;
 	map->map_copy = malloc(sizeof(char *) * map->window_height);
 	map->i = -1;
-	while (map->i++ < map->window_height)
+	a = 0;
+	while (map->i++ < map->window_height - map->map_start)
 		map->map_copy[map->i] = malloc(sizeof(char *) * (map->window_width + 1));
-	map->i = 0;
+	map->i = map->map_start;
 	while (map->i < map->window_height)
 	{
 		map->j = 0;
 		while (map->j < map->window_width)
 		{
 			if (map->world_map[map->i][map->j] != '\0')
-				map->map_copy[map->i][map->j] = map->world_map[map->i][map->j];
+				map->map_copy[a][map->j] = map->world_map[map->i][map->j];
 			else
-				map->map_copy[map->i][map->j] = 'k';
+				map->map_copy[a][map->j] = 'k';
 			map->j++;
 		}
-		map->map_copy[map->i][map->j] = '\0';
+		map->map_copy[a][map->j] = '\0';
 		map->i++;
 	}
 	return (1);

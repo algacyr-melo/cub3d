@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:23:28 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/02 17:37:56 by almelo           ###   ########.fr       */
+/*   Updated: 2023/06/09 19:13:41 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	textures_main(t_map *map)
 		map->world_map[j] = NULL;
 		j++;
 	}
-	map->world_map += i;
+	map->map_start = i;
 	return (1);
 
 }

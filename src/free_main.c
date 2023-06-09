@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 22:36:22 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/02 15:18:29 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:14:27 by psydenst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	free_matrix(t_map *map)
 		free(map->world_map[map->map_start]);
 		map->map_start++;
 	}
+	free(map->world_map);
 }
