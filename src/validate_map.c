@@ -43,7 +43,7 @@ int	is_valid(t_map *map)
 	if (nsow10(map, i) == 0 || map->sign > 1)
 		return (0);
 	wall_spaces(map);
-	if (check_above(map->map_copy, map->window_height) == 0)
+	if (check_above(map) == 0)
 		return (0);
 	return (1);
 }

@@ -88,7 +88,7 @@ int	wall_spaces(t_map *map)
 	map->map_copy = malloc(sizeof(char *) * map->window_height);
 	map->i = -1;
 	a = 0;
-	while (map->i++ < map->window_height - map->map_start)
+	while (map->i++ < map->window_height - map->map_start - 1)
 		map->map_copy[map->i] = malloc(sizeof(char *) * (map->window_width + 1));
 	map->i = map->map_start;
 	while (map->i < map->window_height)
@@ -104,26 +104,33 @@ int	wall_spaces(t_map *map)
 		}
 		map->map_copy[a][map->j] = '\0';
 		map->i++;
+		a++;
+	}
+	int f = 0;
+	while (map->map_copy[f])
+	{
+		printf("%s\n", map->map_copy[f]);
+		f++;
 	}
 	return (1);
 }
 
 
-int	check_above(char **str, int height)
+int	check_above(t_map *map)
 {
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < height)
+	i = 0;
+	while (i < map->window_height - map->map_start - 1)
 	{
 		j = 0;
-		while (str[i][j])
+		while (map->map_copy[i][j])
 		{
-			if (str[i][j] == '0')
+			if (map->map_copy[i][j] == '0')
 			{
-				if (str[i - 1][j] == 'k' || str[i][j + 1] == 'k' ||
-				str[i][j - 1] == 'k')
+				if (map->map_copy[i - 1][j] == 'k' ||map->map_copy [i][j + 1] == 'k' ||
+				map->map_copy[i][j - 1] == 'k')
 					return (0);
 			}
 			j++;
@@ -131,8 +138,8 @@ int	check_above(char **str, int height)
 		i++;
 	}
 	i = -1;
-	while (++i < height)
-		free(str[i]);
-	free(str);
+	while (++i < map->window_height - 1)
+		free(map->map_copy[i]);
+	free(map->map_copy);
 	return (1);
 }

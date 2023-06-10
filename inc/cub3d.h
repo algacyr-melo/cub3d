@@ -47,7 +47,7 @@ int		ft_is_cub(char *haystack);
 int		ft_is_cub(char *haystack);
 int		verification_main(char **argv, int argc, t_data *data);
 int		wall_spaces(t_map *map);
-int		check_above(char **str, int height);
+int		check_above(t_map *map);
 
 // FREE_MAIN.C
 void	free_main(t_data *data);
