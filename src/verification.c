@@ -76,7 +76,20 @@ int	verification_main(char **argv, int argc, t_data *data)
 	}
 	if (validate_main(&data->map) == 0)
 		return (0);
+	if (empty_textures(&data->map) == 1)
+			return (0);
 	return (1);
+}
+
+int	empty_textures(t_map *map)
+{
+	if (map->path_NO == NULL || map->path_SO == NULL || map->path_WE == NULL
+	  || map->path_EA == NULL || map->floor == NULL || map->ciel == NULL)
+	{
+		printf("Missing textures\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	wall_spaces(t_map *map)
@@ -105,12 +118,6 @@ int	wall_spaces(t_map *map)
 		map->map_copy[a][map->j] = '\0';
 		map->i++;
 		a++;
-	}
-	int f = 0;
-	while (map->map_copy[f])
-	{
-		printf("%s\n", map->map_copy[f]);
-		f++;
 	}
 	return (1);
 }
