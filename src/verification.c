@@ -83,8 +83,8 @@ int	verification_main(char **argv, int argc, t_data *data)
 
 int	empty_textures(t_map *map)
 {
-	if (map->path_NO == NULL || map->path_SO == NULL || map->path_WE == NULL
-	  || map->path_EA == NULL || map->floor == NULL || map->ciel == NULL)
+	if (map->direction == '\0' || map->path_NO == NULL || map->path_SO == NULL ||
+	map->path_WE == NULL || map->path_EA == NULL || map->floor == NULL || map->ciel == NULL)
 	{
 		printf("Missing textures\n");
 		return (1);
