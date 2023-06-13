@@ -31,7 +31,10 @@ int	main( int argc, char **argv)
 	init_data(&data);
 	data = (t_data){0};
 	if (!verification_main(argv, argc, &data))
+	{
+		free_main(&data);
 		return (0);
+	}
 	data.mlx = mlx_init();
 	load_textures(&data);
 	load_colors(&data);

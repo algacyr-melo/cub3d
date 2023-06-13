@@ -14,7 +14,6 @@
 
 int	ft_is_cub(char *haystack)
 {
-	printf("%s\n", haystack);
 	if (ft_strnstr(haystack, ".cub", 4))
 	{
 		free(haystack);
@@ -147,8 +146,8 @@ int	check_above(t_map *map)
 		i++;
 	}
 	i = 0;
-//	while (i++ < map->window_height - 1)
-//		free(map->map_copy[i]);
+//	while (i++ <= map->window_height)
+//	free(map->map_copy[i]);
 //	free(map->map_copy);
 	return (1);
 }

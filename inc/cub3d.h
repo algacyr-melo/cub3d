@@ -53,6 +53,7 @@ int empty_textures(t_map *map);
 // FREE_MAIN.C
 void	free_main(t_data *data);
 void	free_matrix(t_map *map);
+void	free_copy(t_map *map);
 
 // 	TEXTURES_PATH
 int		textures_main(t_map *map);
