@@ -144,9 +144,9 @@ int	check_above(t_map *map)
 		}
 		i++;
 	}
-	i = -1;
-	while (++i < map->window_height - 1)
-		free(map->map_copy[i]);
-	free(map->map_copy);
+	i = 0;
+//	while (i++ < map->window_height - 1)
+//		free(map->map_copy[i]);
+//	free(map->map_copy);
 	return (1);
 }
