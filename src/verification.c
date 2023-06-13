@@ -6,7 +6,7 @@
 /*   By: psydenst <psydenst@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 21:33:00 by psydenst          #+#    #+#             */
-/*   Updated: 2023/06/09 20:50:58 by psydenst         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:02:32 by almelo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_is_cub(char *haystack)
 {
+	printf("%s\n", haystack);
 	if (ft_strnstr(haystack, ".cub", 4))
 	{
 		free(haystack);
@@ -48,6 +49,7 @@ int	validate_cub(char *map_name)
 		b++;
 		a--;
 	}
+	haystack[x] = '\0';
 	if (ft_is_cub(haystack) == 1)
 		return (1);
 	else
