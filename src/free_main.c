@@ -32,22 +32,23 @@ void	free_main(t_data *data)
     free_copy(&data->map);
 }
 
-void  free_copy(t_map *map)
-{
-  int i;
+void free_copy(t_map *map)
+ {
+     int i = 0;
 
-  i = -1;
-  while (++i <= map->window_height)
-    free(map->map_copy[i]);
-  free(map->map_copy);
-}
+     while (i < map->window_height - map->map_start)
+     {
+         free(map->map_copy[i]);
+         map->map_copy[i] = NULL;
+         i++;
+     }
+     free(map->map_copy);
+     map->map_copy = NULL;
+ }
 
 void	free_matrix(t_map *map)
 {
-  int i;
-
-  i = -1;
-  while (map->world_map[map->map_start])
+   while (map->world_map[map->map_start])
 	{
 		free(map->world_map[map->map_start]);
 		map->map_start++;
