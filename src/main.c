@@ -12,7 +12,8 @@
 
 #include "../inc/cub3d.h"
 
-static void init_data(t_data *data)
+/*
+static	void	init_data(t_data *data)
 {
 	data->map.sign = 0;
 	data->map.path_NO = NULL;
@@ -23,13 +24,14 @@ static void init_data(t_data *data)
 	data->map.ciel = NULL;
 	data->map.world_map = NULL;
 }
+*/
 
 int	main( int argc, char **argv)
 {
 	t_data	data;
 
-	init_data(&data);
 	data = (t_data){0};
+    data.map = (t_map){0};
 	if (!verification_main(argv, argc, &data))
 	{
 		free_main(&data);

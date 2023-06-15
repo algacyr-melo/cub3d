@@ -33,7 +33,7 @@ SRC			=	src/main.c \
 				src/move.c \
 				src/rotate.c \
 				src/clear_frame_buffer.c \
-
+				src/textures_path2.c
 OBJ			= $(SRC:.c=.o)
 
 CC			= gcc
@@ -42,7 +42,7 @@ CFLAGS		= -Wall -Wextra -Werror -g
 
 MLX			= mlx/libmlx.a
 
-MLX_LINUX	= mlx_linux/libmlx_Linux.a
+MLX_LINUX	= mlx_linux/libmlx.a
 
 LIBFT		= libft/libft.a
 
@@ -51,7 +51,6 @@ DETECTED_OS	= $(shell uname)
 ifeq ($(DETECTED_OS), Linux)
 $(NAME)		: $(OBJ) $(MLX_LINUX) $(LIBFT) inc/cub3d.h
 	$(CC) $(OBJ) -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-
 %.o			: %.c
 	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 else

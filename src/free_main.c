@@ -14,44 +14,43 @@
 
 void	free_main(t_data *data)
 {
-	if (data->map.path_NO != NULL)
-		free(data->map.path_NO);
-	if (data->map.path_SO != NULL)
-		free(data->map.path_SO);
-	if (data->map.path_WE != NULL)
-		free(data->map.path_WE);
-	if (data->map.path_EA != NULL)
-		free(data->map.path_EA);
+	if (data->map.path_no != NULL)
+		free(data->map.path_no);
+	if (data->map.path_so != NULL)
+		free(data->map.path_so);
+	if (data->map.path_we != NULL)
+		free(data->map.path_we);
+	if (data->map.path_ea != NULL)
+		free(data->map.path_ea);
 	if (data->map.floor != NULL)
 		free(data->map.floor);
 	if (data->map.ciel != NULL)
 		free(data->map.ciel);
 	if (data->map.world_map != NULL)
 		free_matrix(&data->map);
-  if (data->map.map_copy != NULL)
-    free_copy(&data->map);
+	if (data->map.map_copy != NULL)
+		free_copy(&data->map);
 }
 
-void free_copy(t_map *map)
- {
-     int i = 0;
+void	free_copy(t_map *map)
+{
+	int	i;
 
-     while (i < map->window_height - map->map_start)
-     {
-         free(map->map_copy[i]);
-         map->map_copy[i] = NULL;
-         i++;
-     }
-     free(map->map_copy);
-     map->map_copy = NULL;
- }
+	i = -1;
+	while (++i <= map->window_height - map->map_start)
+		free(map->map_copy[i]);
+	free(map->map_copy);
+}
 
 void	free_matrix(t_map *map)
 {
-   while (map->world_map[map->map_start])
+	int	i;
+
+	i = map->map_start;
+	while (map->world_map[i])
 	{
-		free(map->world_map[map->map_start]);
-		map->map_start++;
+		free(map->world_map[i]);
+		i++;
 	}
 	free(map->world_map);
 }
