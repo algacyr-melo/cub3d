@@ -99,21 +99,131 @@ By setting the delta distances, we ensure that the ray moves incrementally in a 
 
 In summary, the set_delta_dist function calculates and assigns the delta distances for the ray's movement in the x and y directions. These distances are essential for accurately stepping the ray through the environment and determining its intersections with objects or walls.
 
-4. **Calculate Ray Step**: [Add the description for this step]
+4. **Calculate Ray Step**: Calculate Ray Step:
+In order to traverse the virtual environment grid, the ray needs to determine the step direction for both the x-axis and y-axis. This step direction indicates whether the ray should move in a positive or negative direction along each axis.
 
-5. **Calculate Side Dist**: [Add the description for this step]
+The calculate_ray_step function determines the step direction based on the sign of the ray's direction components (ray_dir_x and ray_dir_y). If either component is negative, it means the ray needs to move in the negative direction along the corresponding axis. Otherwise, it moves in the positive direction.
 
-6. **DDA Loop**: [Add the description for this step]
+```
+void calculate_ray_step(t_raycaster *rc) {
+    if (rc->ray_dir_x < 0)
+        rc->step_x = -1;
+    else
+        rc->step_x = 1;
+    if (rc->ray_dir_y < 0)
+        rc->step_y = -1;
+    else
+        rc->step_y = 1;
+    return;
+}
+```
 
-### Implementation Details
-In this project, the raycasting algorithm is implemented using [programming language or framework/library]. Here are some code snippets that illustrate the logic:
+By setting the step direction, the raycasting algorithm ensures that the ray moves through the grid in a consistent manner, progressing from one cell to the next. The step direction is used in the subsequent steps of the algorithm to increment or decrement the ray's position in each axis.
 
-[Include code snippets that correspond to the mentioned steps]
+This calculation is crucial for maintaining the ray's trajectory and correctly traversing the virtual environment grid, allowing for accurate detection of intersections with walls and objects.
+
+By determining the step direction, the raycasting algorithm ensures that the ray follows a straight path through the grid, moving from one cell to the next in a predictable manner. This is an essential component of the algorithm to accurately render the 3D environment and detect collisions with objects.
+
+5. **Calculate Side Dist**:
+In the raycasting process, it is necessary to determine the initial side distances from the ray's starting position to the next x-side and y-side in the virtual environment grid. These side distances help track the distance the ray needs to travel to reach the next x-side or y-side.
+
+The calculate_side_dist function calculates the side distances (side_dist_x and side_dist_y) based on the ray's direction and its relative position within the current grid cell.
+
+```
+void calculate_side_dist(t_raycaster *rc, t_data *data) {
+    if (rc->ray_dir_x < 0)
+        rc->side_dist_x = (data->pos_x - rc->map_x) * rc->delta_dist_x;
+    else
+        rc->side_dist_x = (rc->map_x + 1.0 - data->pos_x) * rc->delta_dist_x;
+    if (rc->ray_dir_y < 0)
+        rc->side_dist_y = (data->pos_y - rc->map_y) * rc->delta_dist_y;
+    else
+        rc->side_dist_y = (rc->map_y + 1.0 - data->pos_y) * rc->delta_dist_y;
+    return;
+}
+```
+
+The side distances are calculated by considering the ray's direction along the x-axis and y-axis. If the ray's direction along a specific axis is negative, it means the ray is moving in the negative direction along that axis. In this case, the side distance is calculated as the difference between the current position (pos_x or pos_y) and the current grid cell position (map_x or map_y), multiplied by the corresponding delta distance (delta_dist_x or delta_dist_y).
+
+On the other hand, if the ray's direction along a specific axis is positive, it means the ray is moving in the positive direction along that axis. In this case, the side distance is calculated as the difference between the next grid cell position and the current position, multiplied by the corresponding delta distance.
+
+The calculated side distances are important for determining the distance the ray needs to travel to reach the next x-side or y-side in the grid. This information is used in the subsequent steps of the algorithm, such as the Digital Differential Analyzer (DDA) loop, to determine which side (x-side or y-side) the ray encounters first and to perform accurate wall intersection calculations.
+
+I hope this explanation, along with the provided code snippet, clarifies the purpose and role of the Calculate Side Dist step in the raycasting algorithm.
+
+6. **DDA Loop**:
+The DDA (Digital Differential Analyzer) loop is a crucial part of the raycasting algorithm. DDA is used to step through the grid and check for collisions with walls. Here's an explanation of how it works:
+
+The DDA loop continues until a collision with a wall is detected. The variable rc->hit is initially set to 0, indicating no collision.
+
+In each iteration of the loop, the distances to the next potential intersections along the x and y axes are compared: rc->side_dist_x and rc->side_dist_y, respectively. If rc->side_dist_x is smaller, it means the next intersection is along the x axis, so the ray moves to the next grid cell horizontally.
+
+When moving horizontally, rc->side_dist_x is incremented by rc->delta_dist_x to update the distance to the next intersection along the x axis. rc->map_x is also updated by rc->step_x, which is either -1 or 1 depending on the ray direction, to move to the next grid cell horizontally. The variable rc->side is set to 0 to indicate a horizontal intersection.
+
+If rc->side_dist_y is smaller, it means the next intersection is along the y axis, so the ray moves to the next grid cell vertically.
+
+When moving vertically, rc->side_dist_y is incremented by rc->delta_dist_y to update the distance to the next intersection along the y axis. rc->map_y is updated by rc->step_y, which is either -1 or 1 depending on the ray direction, to move to the next grid cell vertically. The variable rc->side is set to 1 to indicate a vertical intersection.
+
+After updating the distances and grid positions, the code checks if the current grid cell contains a wall. If data->map.world_map[rc->map_x][rc->map_y] is equal to '1', it means there is a wall in that location, and rc->hit is set to 1 to indicate a collision.
+
+This process continues until a wall is hit, and the DDA loop terminates.
+
+The DDA loop plays a crucial role in tracing the ray's path through the grid and identifying the exact point of collision with walls. It allows for precise rendering of the walls and determines the intersection points required for further calculations, such as calculating the distance to the wall and applying textures
+
+```
+void dda_loop(t_raycaster *rc, t_data *data)
+{
+    rc->hit = 0;
+    while (rc->hit == 0)
+    {
+        if (rc->side_dist_x < rc->side_dist_y)
+        {
+            rc->side_dist_x += rc->delta_dist_x;
+            rc->map_x += rc->step_x;
+            rc->side = 0;
+        }
+        else
+        {
+            rc->side_dist_y += rc->delta_dist_y;
+            rc->map_y += rc->step_y;
+            rc->side = 1;
+        }
+        if (data->map.world_map[rc->map_x][rc->map_y] == '1')
+            rc->hit = 1;
+    }
+    return;
+}
+```
+
+The DDA loop ensures that the ray correctly traverses the grid and stops at the first wall it encounters, allowing for accurate rendering of the 3D environment.
+
+If you have any more questions or need further clarification, feel free to ask.
 
 ### Getting Started
-To run the project on your local machine, follow these steps:
 
-Clone the repository: git clone https://github.com/your-repository.git
-Install the necessary dependencies: npm install or pip install -r requirements.txt, depending on your setup.
-Configure any project-specific settings or parameters, if applicable.
-Run the application: npm start or `
+To run the Cub3d project on your local machine, please follow these steps:
+
+Download and configure the Minilibx library by following the installation instructions provided in the official Minilibx documentation. You can find the installation guide at: Minilibx Installation Guide. Make sure to choose the appropriate instructions for your operating system.
+
+Once you have successfully installed and configured the Minilibx library, you can proceed with the Cub3d project setup.
+
+Clone the Cub3d repository to your local machine using the following command:
+
+```
+git clone https://github.com/algacyr-melo/cub3d.git
+```
+Then navigate to the repository directory. Then run:
+
+```
+make
+```
+
+This will compile all the necessary source files and generate the executable file cub3d.
+
+To launch the application with a specific map, use the following command:
+
+```
+./cub3d maps/chose_a_map
+```
+
+Then enjoy the 3D rendering :)
